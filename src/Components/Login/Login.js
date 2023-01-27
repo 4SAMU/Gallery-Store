@@ -9,7 +9,7 @@ const Login = () => {
     <div className="Page">
       <img className="bg_login" src={BabyThor} alt="" />
       <div className="login_container">
-        <div className="login_header">LOGIN</div>
+        <div className="login_header">SIGN IN</div>
         <input className="login_input" type={"email"} placeholder="email" />
         <input
           className="login_input"
