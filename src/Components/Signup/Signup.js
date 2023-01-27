@@ -19,7 +19,7 @@ const Signup = () => {
           placeholder="password"
         />
         <button className="signupbtn">SIGN UP</button>
-        <p className="alreadyhaveAcc">already have an account??</p>
+        <p className="alreadyhaveAcc">already have an account?</p>
         <Link to={"/Login"}>
           <p className="alreadyhaveAcc_p">Sign in</p>
         </Link>
