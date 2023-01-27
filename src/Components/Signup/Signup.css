@@ -22,7 +22,7 @@
 
 .signup_header {
   position: absolute;
-  width: 46px;
+  width: max-content;
   height: 18px;
   left: 50%;
   transform: translateY(-50%);
