@@ -10,7 +10,7 @@ const Loading = () => {
     setTimeout(() => {
       setLoading(false);
       window.location.replace("/Login");
-    }, 5000);
+    }, 3000);
   }, []);
 
   if (loading) {
