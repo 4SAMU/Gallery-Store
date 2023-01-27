@@ -11,7 +11,7 @@ const Signup = () => {
     <div className="Page">
       <img className="bg_login" src={BabyThor} alt="" />
       <div className="signup_container">
-        <div className="signup_header">signup</div>
+        <div className="signup_header">SIGN UP</div>
         <input className="signup_input" type={"text"} placeholder="name" />
         <input className="signup_input" type={"email"} placeholder="email" />
         <input
