@@ -1,0 +1,39 @@
+/** @format */
+
+.LoadingPage {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: #0b3344;
+}
+
+.loading {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  color: aliceblue;
+  font-size: 15px;
+}
+
+.loading-bar {
+  width: max-content;
+  animation: loading 8s ease-in-out infinite;
+}
+
+@keyframes loading {
+  0% {
+    transform: scale(1);
+  }
+  20% {
+    transform: scale(1, 2.5);
+  }
+  40% {
+    transform: scale(1);
+  }
+}
+
+
