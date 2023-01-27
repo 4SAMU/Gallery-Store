@@ -3,6 +3,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import BabyThor from "../../assets/thor.png";
+import Google from "../../assets/google.png";
 import "./Signup.css";
 
 const Signup = () => {
@@ -19,6 +20,10 @@ const Signup = () => {
           placeholder="password"
         />
         <button className="signupbtn">SIGN UP</button>
+        <button className="signupbtn">
+          sign up with
+          <img src={Google} alt="" className="googleIcon" />
+        </button>
         <p className="alreadyhaveAcc">already have an account?</p>
         <Link to={"/Login"}>
           <p className="alreadyhaveAcc_p">Sign in</p>

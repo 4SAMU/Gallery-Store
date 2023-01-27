@@ -54,13 +54,14 @@
 }
 
 .signupbtn {
-  position: absolute;
+  position: relative;
   width: 215px;
   height: 35px;
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
-  top: 265px;
+  top: 55px;
+  margin-top: 24px;
   background: #0e88bc;
   border: 0ch;
   border-radius: 4px;
@@ -77,7 +78,7 @@
   width: max-content;
   height: 18px;
   left: 0;
-  top: 302px;
+  top: 362px;
   margin-top: 15px;
   font-family: "Inter";
   font-style: normal;
@@ -92,7 +93,7 @@
   width: max-content;
   height: 18px;
   left: 0;
-  top: 332px;
+  top: 392px;
   margin-top: 15px;
   font-family: "Inter";
   font-style: normal;
@@ -100,4 +101,13 @@
   font-size: 15px;
   line-height: 18px;
   color: #0e88bc;
+  text-decoration: underline;
+}
+
+.googleIcon {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  right: 30px;
+  top: 7.5px;
 }
