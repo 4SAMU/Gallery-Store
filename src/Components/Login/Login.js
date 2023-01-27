@@ -1,7 +1,6 @@
 /** @format */
 
 import React from "react";
-import "./Login.css";
 import BabyThor from "../../assets/thor.png";
 import { Link } from "react-router-dom";
 
