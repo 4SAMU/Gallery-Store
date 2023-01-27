@@ -3,13 +3,14 @@
 import React, { useEffect, useState } from "react";
 import "./Loader.css";
 
-const withLoading = (WrappedComponent) => (props) => {
+const Loading = () => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 3000);
+      window.location.replace("/Login");
+    }, 5000);
   }, []);
 
   if (loading) {
@@ -21,8 +22,6 @@ const withLoading = (WrappedComponent) => (props) => {
       </div>
     );
   }
-
-  return <WrappedComponent {...props} />;
 };
 
-export default withLoading;
+export default Loading;
