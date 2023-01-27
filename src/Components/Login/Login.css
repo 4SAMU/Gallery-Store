@@ -27,6 +27,18 @@
   top: 200px;
 }
 
+@media screen and (max-width: 400px) {
+  .login_container {
+    top: 25vh;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .login_container {
+    top: 30vh;
+  }
+}
+
 .login_header {
   position: absolute;
   width: 46px;
@@ -60,14 +72,14 @@
   outline: 0ch;
 }
 
-.signupbtn {
+.signinbtn {
   position: absolute;
   width: 215px;
   height: 35px;
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
-  top: 265px;
+  top: 205px;
   background: #0e88bc;
   border: 0ch;
   border-radius: 4px;
@@ -84,7 +96,7 @@
   width: max-content;
   height: 18px;
   left: 0;
-  top: 302px;
+  top: 250px;
   margin-top: 15px;
   font-family: "Inter";
   font-style: normal;
@@ -99,7 +111,7 @@
   width: max-content;
   height: 18px;
   left: 0;
-  top: 332px;
+  top: 280px;
   margin-top: 15px;
   font-family: "Inter";
   font-style: normal;
