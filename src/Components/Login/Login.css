@@ -19,19 +19,27 @@
   border: 0ch;
 }
 
+.login_container {
+  position: absolute;
+  width: 200px;
+  height: 267px;
+  left: 135px;
+  top: 200px;
+}
+
 .login_header {
   position: absolute;
   width: 46px;
   height: 18px;
-  left: 212px;
-  top: 267px;
-
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 20px;
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-
   color: #ffffff;
 }
 
@@ -39,8 +47,10 @@
   position: relative;
   width: 200px;
   height: 35px;
-  left: 135px;
-  top: 311px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 50px;
   margin-top: 24px;
   background: #0b3344;
   border: 1px solid #d9d9d9;
@@ -54,12 +64,13 @@
   position: absolute;
   width: 215px;
   height: 35px;
-  left: 135px;
-  top: 531px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 265px;
   background: #0e88bc;
   border: 0ch;
   border-radius: 4px;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
@@ -72,16 +83,14 @@
   position: absolute;
   width: max-content;
   height: 18px;
-  left: 135px;
-  top: 582px;
+  left: 0;
+  top: 302px;
   margin-top: 15px;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-
   color: #ffffff;
 }
 
@@ -89,15 +98,13 @@
   position: absolute;
   width: max-content;
   height: 18px;
-  left: 135px;
-  top: 610px;
+  left: 0;
+  top: 332px;
   margin-top: 15px;
-
   font-family: "Inter";
   font-style: normal;
   font-weight: 400;
   font-size: 15px;
   line-height: 18px;
-
   color: #0e88bc;
 }
