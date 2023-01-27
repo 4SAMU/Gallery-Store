@@ -1,0 +1,84 @@
+/** @format */
+
+.Home_header_container {
+  position: absolute;
+  width: 300px;
+  height: 34px;
+  top: 4vh;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+.Home_header {
+  position: absolute;
+  width: max-content;
+  height: 18px;
+  left: 0px;
+  top: -4px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.userImage {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  right: 0px;
+  top: 0;
+  background-color: aqua;
+  border-radius: 50%;
+}
+
+.Story_status {
+  position: absolute;
+  width: 294px;
+  height: 62px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 104px;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.Story_status_pics {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background: #074763;
+}
+
+.many_pics_container {
+  position: absolute;
+  width: 295px;
+  height: 526px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 187px;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  /* background: #d9d9d9; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+}
+
+.pic_card {
+  position: relative;
+  width: 294px;
+  height: 284px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 5px;
+  margin-top: 10px;
+  background: #074763;
+}
