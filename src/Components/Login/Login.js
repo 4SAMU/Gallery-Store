@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 const Login = () => {
   return (
-    <div className="LogingPage">
+    <div className="Page">
       <img className="bg_login" src={BabyThor} alt="" />
       <div className="login_container">
         <div className="login_header">LOGIN</div>

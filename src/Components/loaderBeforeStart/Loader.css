@@ -1,6 +1,6 @@
 /** @format */
 
-.LoadingPage {
+.Page {
   position: absolute;
   width: 100vw;
   height: 100vh;
@@ -35,5 +35,3 @@
     transform: scale(1);
   }
 }
-
-
