@@ -19,7 +19,7 @@ const Login = () => {
         <button className="signinbtn">SIGN IN</button>
         <p className="donthaveAcc">don’t have an account?</p>
         <Link to={"/Signup"}>
-          <p className="donthaveAcc_p">Signup</p>
+          <p className="donthaveAcc_p">Sign up</p>
         </Link>
       </div>
     </div>
