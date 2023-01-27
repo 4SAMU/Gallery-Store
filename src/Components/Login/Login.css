@@ -49,3 +49,55 @@
   padding-left: 10px;
   outline: 0ch;
 }
+
+.signupbtn {
+  position: absolute;
+  width: 215px;
+  height: 35px;
+  left: 135px;
+  top: 531px;
+  background: #0e88bc;
+  border: 0ch;
+  border-radius: 4px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 19px;
+  color: #ffffff;
+}
+
+.donthaveAcc {
+  position: absolute;
+  width: max-content;
+  height: 18px;
+  left: 135px;
+  top: 582px;
+  margin-top: 15px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #ffffff;
+}
+
+.donthaveAcc_p {
+  position: absolute;
+  width: max-content;
+  height: 18px;
+  left: 135px;
+  top: 610px;
+  margin-top: 15px;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #0e88bc;
+}
