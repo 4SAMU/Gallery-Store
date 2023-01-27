@@ -1,0 +1,21 @@
+/** @format */
+
+.LogingPage {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  top: 0;
+  left: 0;
+  background: #0b3344;
+}
+
+.bg_login {
+  position: absolute;
+  width: 197px;
+  height: 100vh;
+  left: 0px;
+  top: 0px;
+  background: #5c95ad;
+  border-radius: 0px 200px 200px 0px;
+  border: 0ch;
+}

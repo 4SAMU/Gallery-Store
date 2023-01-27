@@ -1,9 +1,15 @@
-import React from 'react'
+/** @format */
+
+import React from "react";
+import "./Login.css"
+// import BabyThor from "../../assets"
 
 const Login = () => {
   return (
-    <div>Login</div>
-  )
-}
+    <div className="LogingPage">
+      <img className="bg_login" src="" alt="" />
+    </div>
+  );
+};
 
-export default Login
+export default Login;
