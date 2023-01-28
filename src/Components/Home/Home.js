@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useState } from "react";
 import "./Home.css";
 import Thor from "../../assets/thorbaby.jpeg";
 import samu from "../../assets/samu.jpeg";
@@ -8,13 +8,20 @@ import Navbar from "../Navabar/Navbar";
 
 import { FiHeart } from "@react-icons/all-files/fi/FiHeart";
 import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
+import Modal from "../ModalPopup/Modal";
 
 const Home = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   return (
-    <div className="Page">
+    <div className="Page" >
       <div className="Home_header_container">
         <p className="Home_header">Hello, Samuel</p>
-        <div className="userImage">
+        <div
+          className="userImage"
+          onMouseEnter={() => setIsModalOpen(true)}
+          onClick={() => setIsModalOpen(!isModalOpen)}
+        >
           <img src={samu} alt="" className="userImage" />
         </div>
       </div>
@@ -70,6 +77,7 @@ const Home = () => {
         </div>
       </div>
       <Navbar />
+      <Modal isOpen={isModalOpen} />
     </div>
   );
 };
