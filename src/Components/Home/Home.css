@@ -85,7 +85,6 @@
   overflow-x: hidden;
 }
 
-
 .pic_card {
   position: relative;
   width: 294px;
@@ -118,11 +117,14 @@
   width: 25px;
   height: 25px;
   cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: 0ch;
 }
 
 .likeBtn:active,
 .downloadBtn:active {
-  color: red;
+  color: #0e88bc;
 }
 
 .downloadBtn {
@@ -132,6 +134,9 @@
   width: 25px;
   height: 25px;
   cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: 0ch;
 }
 
 .caption {

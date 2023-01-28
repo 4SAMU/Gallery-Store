@@ -3,10 +3,11 @@
 import React from "react";
 import "./Home.css";
 import Thor from "../../assets/thorbaby.jpeg";
-import likeBtn from "../../assets/likeBtn.svg";
-import downloadBtn from "../../assets/downloadBtn.svg";
 import samu from "../../assets/samu.jpeg";
 import Navbar from "../Navabar/Navbar";
+
+import { FiHeart } from "@react-icons/all-files/fi/FiHeart";
+import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
 
 const Home = () => {
   return (
@@ -35,22 +36,36 @@ const Home = () => {
       <div className="many_pics_container">
         <div className="pic_card">
           <img src={Thor} alt="" className="myPic" />
-          <img src={likeBtn} alt="" className="likeBtn" />
-          <img src={downloadBtn} alt="" className="downloadBtn" />
+          <FiHeart className="likeBtn" />
+          <BsDownload className="downloadBtn" />
           <p className="caption">Baby thor</p>
         </div>
 
         <div className="pic_card">
           <img src={Thor} alt="" className="myPic" />
-          <img src={likeBtn} alt="" className="likeBtn" />
-          <img src={downloadBtn} alt="" className="downloadBtn" />
+          <FiHeart className="likeBtn" />
+          <BsDownload className="downloadBtn" />
           <p className="caption">Baby thor</p>
         </div>
 
         <div className="pic_card">
           <img src={Thor} alt="" className="myPic" />
-          <img src={likeBtn} alt="" className="likeBtn" />
-          <img src={downloadBtn} alt="" className="downloadBtn" />
+          <FiHeart className="likeBtn" />
+          <BsDownload className="downloadBtn" />
+          <p className="caption">Baby thor</p>
+        </div>
+
+        <div className="pic_card">
+          <img src={Thor} alt="" className="myPic" />
+          <FiHeart className="likeBtn" />
+          <BsDownload className="downloadBtn" />
+          <p className="caption">Baby thor</p>
+        </div>
+
+        <div className="pic_card">
+          <img src={Thor} alt="" className="myPic" />
+          <FiHeart className="likeBtn" />
+          <BsDownload className="downloadBtn" />
           <p className="caption">Baby thor</p>
         </div>
       </div>

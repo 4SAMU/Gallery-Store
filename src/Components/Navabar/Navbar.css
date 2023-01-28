@@ -8,6 +8,50 @@
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
-  background: red;
 }
 
+.homeBtn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 0px;
+  top: 0px;
+  color: #fff;
+  background: none;
+  border: 0ch;
+  cursor: pointer;
+}
+
+.profileBtn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  background: none;
+  border: 0ch;
+  color: #fff;
+  cursor: pointer;
+}
+
+.pictureBtn {
+  position: absolute;
+  width: 30px;
+  height: 30px;
+  right: 0px;
+  top: 0px;
+  color: #fff;
+  background: none;
+  border: 0ch;
+  cursor: pointer;
+}
+
+.homeBtn:active,
+.homeBtn:hover,
+.profileBtn:active,
+.profileBtn:hover,
+.pictureBtn:active,
+.pictureBtn:hover {
+  color: #0e88bc;
+}

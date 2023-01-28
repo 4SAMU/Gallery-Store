@@ -16,8 +16,8 @@ const Loading = () => {
   if (loading) {
     return (
       <div className="LoadingPage">
-        <div class="loading">
-          <div class="loading-bar">Welcome to Gallery store</div>
+        <div className="loading">
+          <div className="loading-bar">Welcome to Gallery store</div>
         </div>
       </div>
     );
