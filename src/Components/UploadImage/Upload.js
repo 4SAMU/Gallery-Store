@@ -6,7 +6,7 @@ import "./Upload.css";
 
 const Upload = () => {
   return (
-    <div>
+    <div className="Page">
       <Navbar />
     </div>
   );
