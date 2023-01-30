@@ -71,8 +71,8 @@
 
 .many_pics_container {
   position: absolute;
-  width: 295px;
-  height: 67vh;
+  width: 98vw;
+  height: 82vh;
 
   left: 50%;
   transform: translateY(-50%);
@@ -83,12 +83,22 @@
   /* background: #d9d9d9; */
   overflow-y: scroll;
   overflow-x: hidden;
+  border-radius: 5px;
+}
+
+@media screen and (max-height: 400px) {
+  .many_pics_container {
+    top: 26vh;
+  }
+  .Story_status {
+    top: 10.5vh;
+  }
 }
 
 .pic_card {
   position: relative;
-  width: 294px;
-  height: 294px;
+  width: 100vw;
+  height: 81vh;
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
@@ -100,14 +110,13 @@
 
 .myPic {
   position: absolute;
-  width: 294px;
-  height: 248px;
+  width: 100vw;
+  height: 81vh;
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
   top: 0px;
   background: #ffffff;
-  border-radius: 5px 5px 0px 0px;
 }
 
 .likeBtn {
@@ -129,8 +138,8 @@
 
 .downloadBtn {
   position: absolute;
-  bottom: 60px;
-  right: 10px;
+  top: 10px;
+  left: 10px;
   width: 25px;
   height: 25px;
   cursor: pointer;
