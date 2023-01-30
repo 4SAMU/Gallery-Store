@@ -44,35 +44,9 @@ const Home = () => {
         <div className="pic_card">
           <img src={Thor} alt="" className="myPic" />
           <FiHeart className="likeBtn" />
-          <BsDownload className="downloadBtn" />
-          <p className="caption">Baby thor</p>
-        </div>
-
-        <div className="pic_card">
-          <img src={Thor} alt="" className="myPic" />
-          <FiHeart className="likeBtn" />
-          <BsDownload className="downloadBtn" />
-          <p className="caption">Baby thor</p>
-        </div>
-
-        <div className="pic_card">
-          <img src={Thor} alt="" className="myPic" />
-          <FiHeart className="likeBtn" />
-          <BsDownload className="downloadBtn" />
-          <p className="caption">Baby thor</p>
-        </div>
-
-        <div className="pic_card">
-          <img src={Thor} alt="" className="myPic" />
-          <FiHeart className="likeBtn" />
-          <BsDownload className="downloadBtn" />
-          <p className="caption">Baby thor</p>
-        </div>
-
-        <div className="pic_card">
-          <img src={Thor} alt="" className="myPic" />
-          <FiHeart className="likeBtn" />
-          <BsDownload className="downloadBtn" />
+          <a href={Thor} download={Thor}>
+            <BsDownload className="downloadBtn" />
+          </a>
           <p className="caption">Baby thor</p>
         </div>
       </div>
