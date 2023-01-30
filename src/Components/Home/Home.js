@@ -14,7 +14,7 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
-    <div className="Page" >
+    <div className="Page">
       <div className="Home_header_container">
         <p className="Home_header">Hello, Samuel</p>
         <div

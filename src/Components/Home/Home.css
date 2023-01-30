@@ -150,9 +150,9 @@
 
 .caption {
   position: absolute;
-  bottom: -5px;
+  top: 40px;
   left: 10px;
-  width: 200px;
+  width: 100px;
   height: 25px;
   color: #969191;
   font-style: italic;
