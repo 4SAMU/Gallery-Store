@@ -2,11 +2,9 @@
 
 nav {
   width: 80vw;
-  display: block;
   justify-content: space-between;
   padding: 0.7rem 1.7rem;
-  z-index: 2;
-  position: fixed;
+  position: absolute;
   left: 50%;
   transform: translateX(-50%);
   bottom: 0.1rem;

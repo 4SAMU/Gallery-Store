@@ -16,36 +16,33 @@ const Upload = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
   return (
-      <div className="Page">
-        <div className="profile_container">
-          <div className="UpdateProfile">Upload Image</div>
-          {selectedFile ? (
-            <div>
-              <img src={fileImage} alt="" className="UpdateImage_imageArea" />
+    <div className="Page">
+      <div className="profile_container">
+        <div className="UpdateProfile">Upload Image</div>
+        {selectedFile ? (
+          <div>
+            <img src={fileImage} alt="" className="UpdateImage_imageArea" />
+          </div>
+        ) : (
+          <div className="UpdateImage_imageArea">
+            <div className="image_icon">
+              <input
+                type={"file"}
+                className="file-input"
+                onChange={inputFileHandler}
+              />
             </div>
-          ) : (
-            <div className="UpdateImage_imageArea">
-              <div className="image_icon">
-                <input
-                  type={"file"}
-                  className="file-input"
-                  onChange={inputFileHandler}
-                />
-              </div>
-            </div>
-          )}
-          <p className="addCaption">Add Caption</p>
-          <textarea
-            className="addCaption_textArea"
-            placeholder="your caption"
-          />
-          <button className="Upload_Btn" onClick={() => setIsModalOpen(true)}>
-            Upload{" "}
-          </button>
-        </div>
-        <Navbar />
-        <TransclucentBg isOpen={isModalOpen} />
+          </div>
+        )}
+        <p className="addCaption">Add Caption</p>
+        <textarea className="addCaption_textArea" placeholder="your caption" />
+        <button className="Upload_Btn" onClick={() => setIsModalOpen(true)}>
+          Upload{" "}
+        </button>
       </div>
+      <TransclucentBg isOpen={isModalOpen} />
+      <Navbar />
+    </div>
   );
 };
 
