@@ -4,8 +4,19 @@
   "description": "api endpoint to support social media app",
   "main": "index.js",
   "scripts": {
-    "test": "nodemon src/index.js"
+    "start": "nodemon src/index.js"
   },
   "author": "Samuel Nzomo",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.0",
+    "mongodb": "^4.13.0",
+    "mongoose": "^6.9.0",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20",
+    "path": "^0.12.7"
+  }
 }

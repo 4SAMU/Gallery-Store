@@ -1,0 +1,1 @@
+npm install nodemon express bcrypt jsonwebtoken multer path
