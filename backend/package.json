@@ -1,0 +1,11 @@
+{
+  "name": "backend_apis",
+  "version": "1.0.0",
+  "description": "api endpoint to support social media app",
+  "main": "index.js",
+  "scripts": {
+    "test": "nodemon src/index.js"
+  },
+  "author": "Samuel Nzomo",
+  "license": "ISC"
+}
