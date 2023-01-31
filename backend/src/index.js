@@ -1,123 +1,128 @@
 /** @format */
 
 const express = require("express");
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const multer = require("multer");
+const app = express();
+const cors = require("cors");
+const User = require("../models/user.model");
 const mongoose = require("mongoose");
+const jwt = require("jsonwebtoken");
+const bcrypt = require("bcryptjs");
+const multer = require("multer");
+const path = require("path");
 
 require("dotenv").config();
 
-// Connect to MongoDB Atlas
-const db = process.env.MONGODB_URL;
+const { PORT, MONGODB_URL } = process.env;
 
-mongoose
-  .connect(db, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
-  .then(() => {
-    console.log("Connected to DB...");
-  });
-
-const app = express();
+//Middlewares
+app.use(cors());
 app.use(express.json());
 
-const users = [];
-const secret = "your_secret_here";
-
+// Set up Multer for image storage
 const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/images/");
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.fieldname + "-" + Date.now() + ".jpg");
+  destination: "public/uploads/",
+  filename: (req, file, cb) => {
+    cb(null, `${Date.now()}-${file.originalname}`);
   },
 });
 
-const upload = multer({ storage: storage });
-
-app.post("/register", (req, res) => {
-  const { email, password, name } = req.body;
-
-  if (!email || !password || !name) {
-    return res.status(400).json({
-      message: "Email, password, and name are required",
-    });
-  }
-
-  if (users.find((user) => user.email === email)) {
-    return res.status(400).json({
-      message: "Email is already registered",
-    });
-  }
-
-  const hashedPassword = bcrypt.hashSync(password, 10);
-
-  users.push({
-    email,
-    password: hashedPassword,
-    name,
-    image: null,
-  });
-
-  return res.status(201).json({
-    message: "Registration successful",
-  });
+const upload = multer({
+  storage,
+  limits: { fileSize: 1000000 }, // set max file size to 1MB
 });
 
-app.post("/login", (req, res) => {
-  const { email, password } = req.body;
+//Connect to DB
+const URL = MONGODB_URL;
+mongoose.connect(URL).then(() => {
+  console.log("Connected to DB...");
+});
 
-  if (!email || !password) {
-    return res.status(400).json({
-      message: "Email and password are required",
+app.post("/register", upload.single("avatar"), async (req, res) => {
+  try {
+    const newPassword = await bcrypt.hash(req.body.password, 10);
+    await User.create({
+      name: req.body.name,
+      email: req.body.email,
+      password: newPassword,
+      avatar: req.file ? req.file.filename : "",
     });
+    res.json({ status: "ok" });
+  } catch (err) {
+    res.json({ status: "error", error: "Duplicate email", issue: err });
   }
+});
 
-  const user = users.find((user) => user.email === email);
+app.post("/login", async (req, res) => {
+  const user = await User.findOne({
+    email: req.body.email,
+  });
 
   if (!user) {
-    return res.status(401).json({
-      message: "Email or password is incorrect",
-    });
+    res.json("error");
+  } else {
+    const isPasswordValid = await bcrypt.compare(
+      req.body.password,
+      user.password
+    );
+    if (isPasswordValid) {
+      const token = jwt.sign(
+        {
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+        },
+        "secret123"
+      );
+
+      res.set("Authorization", token);
+      return res.json({ status: "ok", user: token });
+    } else {
+      return res.json({ status: "error", user: false });
+    }
   }
-
-  const isPasswordCorrect = bcrypt.compareSync(password, user.password);
-
-  if (!isPasswordCorrect) {
-    return res.status(401).json({
-      message: "Email or password is incorrect",
-    });
-  }
-
-  const token = jwt.sign({ email }, secret, { expiresIn: "1h" });
-
-  return res.status(200).json({
-    message: "Login successful",
-    token,
-  });
 });
 
-app.put("/update-profile-image", upload.single("image"), (req, res) => {
-  const { email } = req.body;
-  const image = req.file.path;
-
-  const userIndex = users.findIndex((user) => user.email === email);
-
-  if (userIndex === -1) {
-    return res.status(404).json({
-      message: "User not found",
-    });
+app.put("/update", upload.single("avatar"), async (req, res) => {
+  const token = req.body.token;
+  console.log(token);
+  if (!token) {
+    return res.status(400).json({ status: "error", error: "Token missing" });
   }
 
-  users[userIndex].image = image;
+  try {
+    const decoded = jwt.verify(token, "secret123");
+    const email = decoded.email;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.json({ status: "error", error: "user not found" });
+    } else {
+      if (req.body.password) {
+        const newPassword = await bcrypt.hash(req.body.password, 10);
+        user.password = newPassword;
+      }
+      user.name = req.body.name;
+      user.email = req.body.email;
+      user.avatar = req.file ? req.file.filename : user.avatar;
+      console.log(req.file);
 
-  return res.status(200).json({
-    message: "Profile image updated",
-  });
+      await user.save();
+      const tokenUpdate = jwt.sign(
+        {
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+        },
+        "secret123"
+      );
+      res.json({ status: "ok", user: tokenUpdate });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "invalid token" });
+  }
 });
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server listening on port ${process.env.PORT}`);
+//Server listening to routes
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}...`);
 });

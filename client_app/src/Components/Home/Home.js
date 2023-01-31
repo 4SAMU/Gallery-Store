@@ -9,14 +9,20 @@ import Navbar from "../Navabar/Navbar";
 import { FiHeart } from "@react-icons/all-files/fi/FiHeart";
 import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
 import Modal from "../ModalPopup/Modal";
+import jwt from "jsonwebtoken";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const token = localStorage.getItem("token");
+
+  const userd = jwt.decode(token);
+
+  console.log(userd);
 
   return (
     <div className="Page">
       <div className="Home_header_container">
-        <p className="Home_header">Hello, Samuel</p>
+        <p className="Home_header">Hello, {userd.name}</p>
         <div
           className="userImage"
           onMouseEnter={() => setIsModalOpen(true)}

@@ -15,6 +15,9 @@ const Upload = () => {
     setSelectedFile(e.target.files[0]);
     setFile(URL.createObjectURL(e.target.files[0]));
   }
+
+
+  
   return (
     <div className="Page">
       <div className="profile_container">

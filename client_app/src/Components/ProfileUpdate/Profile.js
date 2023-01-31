@@ -8,13 +8,53 @@ import "./Profile.css";
 const Profile = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const [fileImage, setFile] = useState();
   function inputFileHandler(e) {
     setSelectedFile(e.target.files[0]);
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-  //   console.log(selectedFile.name);
+
+  async function userUpdate(event) {
+    const token = localStorage.getItem("token");
+    try {
+      setIsModalOpen(true);
+      event.preventDefault();
+      const response = await fetch("http://localhost:5000/update", {
+        method: "PUT",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+          selectedFile,
+          token,
+        }),
+      });
+
+      const data = await response.json();
+      console.log(data);
+
+      if (data.status === "ok") {
+        setIsModalOpen(false);
+        localStorage.setItem("token", data.user);
+        window.location.replace("/Home");
+        console.log(data);
+
+        // alert("status ok");
+      } else if (data.status === "error") {
+        setIsModalOpen(false);
+        alert(data.error);
+      }
+    } catch (error) {
+      setIsModalOpen(false);
+    }
+  }
   return (
     <div className="Page">
       <div className="profile_container">
@@ -38,22 +78,28 @@ const Profile = () => {
           className="input_updateprofile"
           type={"text"}
           placeholder="name"
+          id={name}
+          value={name}
+          onChange={(e) => setName(e.target.value)}
         />
         <input
           className="input_updateprofile"
           type={"email"}
           placeholder="email"
+          id={email}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
         <input
           className="input_updateprofile"
           type={"password"}
           placeholder="password"
+          id={password}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
         />
-        <button
-          className="UpdateProfile_Btn"
-          onClick={() => setIsModalOpen(true)}
-        >
-          Update{" "}
+        <button className="UpdateProfile_Btn" onClick={userUpdate}>
+          Update
         </button>
       </div>
       <Navbar />
