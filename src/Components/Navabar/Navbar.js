@@ -9,17 +9,17 @@ import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
-    <div className="Navbar">
-      <NavLink to={"/Home"}>
-        <GoHome className="homeBtn" />
+    <nav>
+      <NavLink activeclassname="active" to={"/Home"}>
+        <GoHome />
       </NavLink>
-      <NavLink to={"/Profile"}>
-        <FiUser className="profileBtn" />
+      <NavLink activeclassname="active" to={"/Profile"}>
+        <FiUser />
       </NavLink>
-      <NavLink to={"/UploadPic"}>
-        <AiFillCamera className="pictureBtn" />
+      <NavLink activeclassname="active" to={"/UploadPic"}>
+        <AiFillCamera />
       </NavLink>
-    </div>
+    </nav>
   );
 };
 

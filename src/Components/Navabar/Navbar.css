@@ -1,57 +1,30 @@
 /** @format */
 
-.Navbar {
-  position: absolute;
-  width: 300px;
-  height: 34px;
-  bottom: 9%;
+nav {
+  width: 80vw;
+  display: block;
+  justify-content: space-between;
+  padding: 0.7rem 1.7rem;
+  z-index: 2;
+  position: fixed;
   left: 50%;
-  transform: translateY(-50%);
   transform: translateX(-50%);
+  bottom: 0.1rem;
+  display: flex;
+  gap: 0.8rem;
+  border-radius: 6px;
+  backdrop-filter: blur(15px);
 }
 
-.homeBtn {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  left: 0px;
-  top: 0px;
+nav a {
+  background: transparent;
+  /* padding: 0.9rem; */
+  border-radius: 50%;
+  display: flex;
   color: #fff;
-  background: none;
-  border: 0ch;
-  cursor: pointer;
+  font-size: 25px;
 }
 
-.profileBtn {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  left: 50%;
-  transform: translateY(-50%);
-  transform: translateX(-50%);
-  background: none;
-  border: 0ch;
-  color: #fff;
-  cursor: pointer;
-}
-
-.pictureBtn {
-  position: absolute;
-  width: 30px;
-  height: 30px;
-  right: 0px;
-  top: 0px;
-  color: #fff;
-  background: none;
-  border: 0ch;
-  cursor: pointer;
-}
-
-.homeBtn:active,
-.homeBtn:hover,
-.profileBtn:active,
-.profileBtn:hover,
-.pictureBtn:active,
-.pictureBtn:hover {
+.active {
   color: #0e88bc;
 }
