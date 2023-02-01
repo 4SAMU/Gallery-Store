@@ -9,6 +9,7 @@ import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [caption, setCaption] = useState("");
 
   const [fileImage, setFile] = useState();
   function inputFileHandler(e) {

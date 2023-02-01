@@ -6,6 +6,7 @@ const cors = require("cors");
 const User = require("./models/userModel");
 const avatarImage = require("./models/avatarImage");
 const imageUpload = require("./models/imageUplaod");
+const imageCaption = require("./models/imageCaption");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -204,6 +205,18 @@ app.get("/files/:id", (req, res) => {
     res.contentType(file.contentType);
     res.send(file.data);
   });
+});
+
+app.post("/UploadData", async (req, res) => {
+  try {
+    await imageCaption.create({
+      caption: req.body.email,
+      image: req.body.imageUrl,
+    });
+    res.json({ status: "ok" });
+  } catch (err) {
+    res.json({ status: "error", issue: err });
+  }
 });
 
 app.get("/getFiles", (req, res) => {
