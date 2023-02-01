@@ -3,9 +3,9 @@ require("dotenv").config();
 
 const express = require("express");
 const cors = require("cors");
-const User = require("../models/userModel");
-const avatarImage = require("../models/avatarImage");
-const imageUpload = require("../models/imageUplaod");
+const User = require("./models/userModel");
+const avatarImage = require("./models/avatarImage");
+const imageUpload = require("./models/imageUplaod");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
@@ -14,7 +14,7 @@ const multer = require("multer");
 const app = express();
 const upload = multer();
 
-const { PORT, MONGODB_URL } = process.env;
+const { PORT, MONGODB_URL, SECRET } = process.env;
 
 //Middlewares
 app.use(cors());
@@ -37,7 +37,7 @@ app.post("/register", upload.single("avatar"), async (req, res) => {
       name: req.body.name,
       email: req.body.email,
       password: newPassword,
-      avatar: req.file ? req.file.filename : "",
+      avatar: req.body.avatarUrl ? req.body.avatarUrl : "samuel.png",
     });
     res.json({ status: "ok" });
   } catch (err) {
@@ -64,7 +64,7 @@ app.post("/login", async (req, res) => {
           email: user.email,
           avatar: user.avatar,
         },
-        "secret123"
+        SECRET
       );
 
       res.set("Authorization", token);
@@ -81,7 +81,7 @@ app.put("/update", async (req, res) => {
     return res.status(400).json({ status: "error", error: "Token missing" });
   }
   try {
-    const decoded = jwt.verify(token, "secret123");
+    const decoded = jwt.verify(token, SECRET);
     const email = decoded.email;
     const user = await User.findOne({ email: email });
     if (!user) {
@@ -102,7 +102,7 @@ app.put("/update", async (req, res) => {
           email: user.email,
           avatar: user.avatar,
         },
-        "secret123"
+        SECRET
       );
       res.json({ status: "ok", user: tokenUpdate });
     }
@@ -114,7 +114,7 @@ app.put("/update", async (req, res) => {
 
 app.post(
   "/avatar",
-  ( res, next) => {
+  (req, res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Methods",
@@ -146,7 +146,53 @@ app.post(
     });
   }
 );
+app.get("/avatar/:id", (req, res) => {
+  const id = req.params.id;
 
+  avatarImage.findById(id, (err, file) => {
+    if (err) throw err;
+    if (!file) {
+      return res.status(404).send("File not found");
+    }
+    res.contentType(file.contentType);
+    res.send(file.data);
+  });
+});
+
+app.post(
+  "/UploadImage",
+  (req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header(
+      "Access-Control-Allow-Methods",
+      "GET, POST, PUT, DELETE, OPTIONS"
+    );
+    res.header(
+      "Access-Control-Allow-Headers",
+      "Origin, X-Requested-With, Content-Type, Accept"
+    );
+    next();
+  },
+  upload.single("file"),
+  (req, res) => {
+    const file = req.file;
+
+    // Create a new MongoDB document with the file data
+    const newFile = new imageUpload({
+      contentType: file.mimetype,
+      data: file.buffer,
+    });
+
+    // Save the document in the "files" collection
+    newFile.save((err, savedFile) => {
+      if (err) throw err;
+      console.log("File inserted into MongoDB");
+      const fileUrl = `files/${savedFile._id}`;
+      console.log(fileUrl);
+      res.status(200).json({ fileUrl, status: "ok" });
+    });
+  }
+);
 app.get("/files/:id", (req, res) => {
   const id = req.params.id;
 
@@ -160,16 +206,10 @@ app.get("/files/:id", (req, res) => {
   });
 });
 
-app.get("/avatar/:id", (req, res) => {
-  const id = req.params.id;
-
-  avatarImage.findById(id, (err, file) => {
+app.get("/getFiles", (req, res) => {
+  avatarImage.find({}, (err, files) => {
     if (err) throw err;
-    if (!file) {
-      return res.status(404).send("File not found");
-    }
-    res.contentType(file.contentType);
-    res.send(file.data);
+    res.status(200).json({ files });
   });
 });
 

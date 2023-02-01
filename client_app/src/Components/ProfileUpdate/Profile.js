@@ -18,38 +18,82 @@ const Profile = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
-  async function userAvatar(event) {
-    // const tokenX = localStorage.getItem("token");
-
+  async function userAvatar() {
     const file = selectedFile;
     const formData = new FormData();
     formData.append("file", file);
     try {
       setIsModalOpen(true);
-      event.preventDefault();
       const response = await fetch("http://localhost:5000/avatar", {
         method: "POST",
         body: formData,
       });
 
       const data = await response.json();
-      console.log(data);
+      // console.log(data);
 
       if (data.status === "ok") {
-        setIsModalOpen(false);
-        localStorage.setItem("token", data.user);
-        window.location.replace("/Home");
+        // setIsModalOpen(false);
+        // window.location.replace("/Home");
         console.log(data);
-
-        // alert("status ok");
       } else if (data.status === "error") {
         setIsModalOpen(false);
         alert(data.error);
       }
+      return data.fileUrl;
     } catch (error) {
       setIsModalOpen(false);
+      console.log(error);
     }
   }
+
+  async function updateUserData(event) {
+    const token = localStorage.getItem("token");
+    setIsModalOpen(true);
+
+    const avatarUrl = await userAvatar();
+    event.preventDefault();
+
+    if (!avatarUrl) {
+      setIsModalOpen(false);
+      console.log(avatarUrl);
+    } else {
+      try {
+        setIsModalOpen(true);
+        const response = await fetch("http://localhost:5000/update", {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            avatarUrl,
+            token,
+          }),
+        });
+
+        const data = await response.json();
+        console.log(data);
+
+        if (data.status === "ok") {
+          localStorage.setItem("token", data.user);
+
+          window.location.replace("/Home");
+          console.log(data);
+
+          // alert("status ok");
+        } else if (data.status === "error") {
+          alert(data.error);
+        }
+      } catch (error) {
+        setIsModalOpen(false);
+        console.log(error);
+      }
+    }
+  }
+
   return (
     <div className="Page">
       <div className="profile_container">
@@ -93,7 +137,7 @@ const Profile = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="UpdateProfile_Btn" onClick={userAvatar}>
+        <button className="UpdateProfile_Btn" onClick={updateUserData}>
           Update
         </button>
       </div>
