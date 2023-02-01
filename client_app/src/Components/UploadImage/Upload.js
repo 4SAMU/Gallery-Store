@@ -9,7 +9,9 @@ import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [caption, setCaption] = useState("");
+  const [formParams, updateFormParams] = useState({
+    caption: "",
+  });
 
   const [fileImage, setFile] = useState();
   function inputFileHandler(e) {
@@ -43,6 +45,7 @@ const Upload = () => {
 
   async function uploadData() {
     const imageUrl = await uploadImage();
+    const { caption } = formParams;
 
     try {
       setIsModalOpen(true);
@@ -97,7 +100,15 @@ const Upload = () => {
           </div>
         )}
         <p className="addCaption">Add Caption</p>
-        <textarea className="addCaption_textArea" placeholder="your caption" />
+        <textarea
+          className="addCaption_textArea"
+          placeholder="your caption"
+          id={formParams.caption}
+          value={formParams.caption}
+          onChange={(e) =>
+            updateFormParams({ ...formParams, caption: e.target.value })
+          }
+        />
         <button className="Upload_Btn" onClick={uploadData}>
           Upload
         </button>

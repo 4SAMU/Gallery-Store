@@ -9,10 +9,7 @@ import jwt from "jwt-decode";
 const Profile = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-
+  
   const token = localStorage.getItem("token");
   const userd = jwt(token);
 
