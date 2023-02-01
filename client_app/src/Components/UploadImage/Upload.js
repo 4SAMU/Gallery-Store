@@ -48,9 +48,9 @@ const Upload = () => {
       setIsModalOpen(true);
 
       const response = await fetch(
-        "https://gallery-store-api.vercel.app/update",
+        "https://gallery-store-api.vercel.app/UploadData",
         {
-          method: "PUT",
+          method: "POST",
           headers: {
             "content-type": "application/json",
           },
@@ -63,6 +63,14 @@ const Upload = () => {
 
       const data = await response.json();
       console.log(data);
+
+      if (data.status === "ok") {
+        window.location.replace("/Home");
+
+        // alert("status ok");
+      } else if (data.status === "error") {
+        alert(data.error);
+      }
     } catch (error) {
       console.log(error);
       setIsModalOpen(false);
