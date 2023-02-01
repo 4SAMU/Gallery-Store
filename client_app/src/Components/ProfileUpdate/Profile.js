@@ -18,23 +18,18 @@ const Profile = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
-  async function userUpdate(event) {
-    const token = localStorage.getItem("token");
+  async function userAvatar(event) {
+    // const tokenX = localStorage.getItem("token");
+
+    const file = selectedFile;
+    const formData = new FormData();
+    formData.append("file", file);
     try {
       setIsModalOpen(true);
       event.preventDefault();
-      const response = await fetch("http://localhost:5000/update", {
-        method: "PUT",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify({
-          name,
-          email,
-          password,
-          selectedFile,
-          token,
-        }),
+      const response = await fetch("http://localhost:5000/avatar", {
+        method: "POST",
+        body: formData,
       });
 
       const data = await response.json();
@@ -98,7 +93,7 @@ const Profile = () => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <button className="UpdateProfile_Btn" onClick={userUpdate}>
+        <button className="UpdateProfile_Btn" onClick={userAvatar}>
           Update
         </button>
       </div>
