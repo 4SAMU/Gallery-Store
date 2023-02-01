@@ -10,7 +10,6 @@ const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs");
 const multer = require("multer");
-// const path = require("path");
 
 const app = express();
 const upload = multer();
@@ -76,11 +75,46 @@ app.post("/login", async (req, res) => {
   }
 });
 
-app.put("/update");
+app.put("/update", async (req, res) => {
+  const token = req.body.token;
+  if (!token) {
+    return res.status(400).json({ status: "error", error: "Token missing" });
+  }
+  try {
+    const decoded = jwt.verify(token, "secret123");
+    const email = decoded.email;
+    const user = await User.findOne({ email: email });
+    if (!user) {
+      return res.json({ status: "error", error: "user not found" });
+    } else {
+      if (req.body.password) {
+        const newPassword = await bcrypt.hash(req.body.password, 10);
+        user.password = newPassword;
+      }
+      user.name = req.body.name;
+      user.email = req.body.email;
+      user.avatar = req.body.avatarUrl;
+
+      await user.save();
+      const tokenUpdate = jwt.sign(
+        {
+          name: user.name,
+          email: user.email,
+          avatar: user.avatar,
+        },
+        "secret123"
+      );
+      res.json({ status: "ok", user: tokenUpdate });
+    }
+  } catch (error) {
+    console.log(error);
+    res.json({ status: "error", error: "invalid token" });
+  }
+});
 
 app.post(
   "/avatar",
-  (req, res, next) => {
+  ( res, next) => {
     res.header("Access-Control-Allow-Origin", "*");
     res.header(
       "Access-Control-Allow-Methods",
