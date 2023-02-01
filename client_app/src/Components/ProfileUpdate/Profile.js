@@ -24,7 +24,7 @@ const Profile = () => {
     formData.append("file", file);
     try {
       setIsModalOpen(true);
-      const response = await fetch("http://localhost:5000/avatar", {
+      const response = await fetch("https://gallery-store-api.vercel.app/avatar", {
         method: "POST",
         body: formData,
       });
@@ -60,7 +60,7 @@ const Profile = () => {
     } else {
       try {
         setIsModalOpen(true);
-        const response = await fetch("http://localhost:5000/update", {
+        const response = await fetch("https://gallery-store-api.vercel.app/update", {
           method: "PUT",
           headers: {
             "content-type": "application/json",

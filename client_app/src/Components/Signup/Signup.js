@@ -14,17 +14,20 @@ const Signup = () => {
   async function registerUser(event) {
     event.preventDefault();
 
-    const response = await fetch("http://localhost:5000/register", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify({
-        name,
-        email,
-        password,
-      }),
-    });
+    const response = await fetch(
+      "https://gallery-store-api.vercel.app/register",
+      {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify({
+          name,
+          email,
+          password,
+        }),
+      }
+    );
 
     const data = await response.json();
     console.log(data);
