@@ -109,7 +109,7 @@ const Home = () => {
               <div className="pic_card">
                 <img src={uploadItems.image} alt="" className="myPic" />
                 <FiHeart className="likeBtn" />
-                <a href={uploadItems.image} download>
+                <a href={uploadItems.image} download={uploadItems.image}>
                   <BsDownload className="downloadBtn" />
                 </a>
                 <p className="caption">{uploadItems.caption}</p>
