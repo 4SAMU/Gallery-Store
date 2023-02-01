@@ -28,11 +28,27 @@ const Home = () => {
             className="userImage"
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
-            <img src={samu} alt="" className="userImage" />
+            {userd.avatar === "samuel.png" ? (
+              <img src={samu} alt="" className="userImage" />
+            ) : (
+              <img
+                src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
+                alt=""
+                className="userImage"
+              />
+            )}
           </div>
         ) : (
           <div className="userImage" onClick={() => setIsModalOpen(true)}>
-            <img src={samu} alt="" className="userImage" />
+            {userd.avatar === "samuel.png" ? (
+              <img src={samu} alt="" className="userImage" />
+            ) : (
+              <img
+                src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
+                alt=""
+                className="userImage"
+              />
+            )}
           </div>
         )}
       </div>

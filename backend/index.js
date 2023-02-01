@@ -207,7 +207,7 @@ app.get("/files/:id", (req, res) => {
 });
 
 app.get("/getFiles", (req, res) => {
-  avatarImage.find({}, (err, files) => {
+  imageUpload.find({}, (err, files) => {
     if (err) throw err;
     res.status(200).json({ files });
   });

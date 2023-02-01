@@ -16,8 +16,26 @@ const Upload = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
+  async function uploadImage(event) {
+    const file = selectedFile;
+    const formData = new FormData();
+    formData.append("file", file);
 
-  
+    setIsModalOpen(true);
+    event.preventDefault();
+
+    const response = await fetch(
+      "https://gallery-store-api.vercel.app/UploadImage",
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+
+    const data = await response.json();
+    console.log("here", data);
+  }
+
   return (
     <div className="Page">
       <div className="profile_container">
@@ -39,8 +57,8 @@ const Upload = () => {
         )}
         <p className="addCaption">Add Caption</p>
         <textarea className="addCaption_textArea" placeholder="your caption" />
-        <button className="Upload_Btn" onClick={() => setIsModalOpen(true)}>
-          Upload{" "}
+        <button className="Upload_Btn" onClick={uploadImage}>
+          Upload
         </button>
       </div>
       <TransclucentBg isOpen={isModalOpen} />
