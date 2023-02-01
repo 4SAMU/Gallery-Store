@@ -220,7 +220,7 @@ app.post("/UploadData", async (req, res) => {
 });
 
 app.get("/getFiles", (req, res) => {
-  imageUpload.find({}, (err, files) => {
+  imageCaption.find({}, (err, files) => {
     if (err) throw err;
     res.status(200).json({ files });
   });
