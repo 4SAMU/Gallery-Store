@@ -1,0 +1,59 @@
+/** @format */
+
+.ModalContainer {
+  position: absolute;
+  top: 5vh;
+  width: 232px;
+  right: 10vw;
+  height: 152px;
+  background: #0b3344;
+  border: 0.5px solid #0e88bc;
+  border-radius: 30px 0px 30px 30px;
+  display: none;
+}
+
+.ModalContainer.open {
+  display: block;
+}
+
+.ModalContainer.close {
+    display: none;
+}
+
+.ModalContainer_header {
+  position: absolute;
+  width: max-content;
+  height: 18px;
+  top: 4vh;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+
+  color: #ffffff;
+}
+
+.proceedBtn {
+  position: absolute;
+  width: 137px;
+  height: 32px;
+  background: #0e88bc;
+  border-radius: 4px;
+  top: 10vh;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  border: 0ch;
+
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 18px;
+  color: #ffffff;
+}

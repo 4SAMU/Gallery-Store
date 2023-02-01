@@ -1,0 +1,159 @@
+/** @format */
+
+.Home_header_container {
+  position: absolute;
+  width: 95vw;
+  height: 34px;
+  top: 1vh;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+}
+
+.Home_header {
+  position: absolute;
+  width: max-content;
+  height: 18px;
+  left: 0px;
+  top: -4px;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 15px;
+  color: #ffffff;
+}
+
+.userImage {
+  position: absolute;
+  width: 34px;
+  height: 34px;
+  right: 0px;
+  top: 0;
+  background-color: aqua;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.Story_status {
+  position: absolute;
+  width: 294px;
+  height: 62px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 8vh;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.Story_status_pics {
+  position: relative;
+  width: 58px;
+  height: 58px;
+  margin-left: 10px;
+  border-radius: 50%;
+  background: #8da11d;
+}
+
+.status_pics {
+  position: absolute;
+  width: 56px;
+  height: 56px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 1px;
+  background: #074763;
+  border-radius: 50%;
+}
+
+.many_pics_container {
+  position: absolute;
+  width: 98vw;
+  height: 82vh;
+
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 18vh;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  /* background: #d9d9d9; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  border-radius: 5px;
+}
+
+@media screen and (max-height: 400px) {
+  .many_pics_container {
+    top: 26vh;
+  }
+  .Story_status {
+    top: 10.5vh;
+  }
+}
+
+.pic_card {
+  position: relative;
+  width: 100vw;
+  height: 81vh;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 5px;
+  margin-top: 10px;
+  background: #074763;
+  border-radius: 5px;
+}
+
+.myPic {
+  position: absolute;
+  width: 100vw;
+  height: 81vh;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 0px;
+  background: #0e88bc;
+}
+
+.likeBtn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: 0ch;
+}
+
+.likeBtn:active,
+.downloadBtn:active {
+  color: #0e88bc;
+}
+
+.downloadBtn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: #ffffff;
+  background: none;
+  border: 0ch;
+}
+
+.caption {
+  position: absolute;
+  top: 40px;
+  left: 10px;
+  width: 100px;
+  height: 25px;
+  color: #969191;
+  font-style: italic;
+}

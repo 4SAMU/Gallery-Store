@@ -15,7 +15,7 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const token = localStorage.getItem("token");
 
-  const userd = jwt(token);
+  const userd = jwt.decode(token);
 
   console.log(userd);
 
