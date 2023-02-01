@@ -157,3 +157,22 @@
   color: #969191;
   font-style: italic;
 }
+
+.caption,
+.downloadBtn,
+.likeBtn {
+  animation: color-change 5s ease-in-out infinite;
+}
+
+@keyframes color-change {
+  
+  0% {
+   color:#fff;
+  }
+  50% {
+   color: #435258;
+  }
+   100% {
+   color: rgb(12, 146, 163);
+  }
+}
