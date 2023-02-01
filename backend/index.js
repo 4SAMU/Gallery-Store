@@ -198,7 +198,7 @@ app.post(
 app.post("/UploadData", async (req, res) => {
   try {
     await imageCaption.create({
-      caption: req.body.email,
+      caption: req.body.caption,
       image: req.body.imageUrl,
     });
     res.json({ status: "ok" });

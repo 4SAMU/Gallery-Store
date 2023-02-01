@@ -17,24 +17,56 @@ const Upload = () => {
     setFile(URL.createObjectURL(e.target.files[0]));
   }
 
-  async function uploadImage(event) {
+  async function uploadImage() {
     const file = selectedFile;
     const formData = new FormData();
     formData.append("file", file);
+    try {
+      setIsModalOpen(true);
 
-    setIsModalOpen(true);
-    event.preventDefault();
+      const response = await fetch(
+        "https://gallery-store-api.vercel.app/UploadImage",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
-    const response = await fetch(
-      "https://gallery-store-api.vercel.app/UploadImage",
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+      const data = await response.json();
+      console.log("here", data);
+      return data.fileUrl;
+    } catch (error) {
+      console.log(error);
+      setIsModalOpen(false);
+    }
+  }
 
-    const data = await response.json();
-    console.log("here", data);
+  async function uploadData() {
+    const imageUrl = await uploadImage();
+
+    try {
+      setIsModalOpen(true);
+
+      const response = await fetch(
+        "https://gallery-store-api.vercel.app/update",
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            imageUrl,
+            caption,
+          }),
+        }
+      );
+
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+      setIsModalOpen(false);
+    }
   }
 
   return (
@@ -58,7 +90,7 @@ const Upload = () => {
         )}
         <p className="addCaption">Add Caption</p>
         <textarea className="addCaption_textArea" placeholder="your caption" />
-        <button className="Upload_Btn" onClick={uploadImage}>
+        <button className="Upload_Btn" onClick={uploadData}>
           Upload
         </button>
       </div>
