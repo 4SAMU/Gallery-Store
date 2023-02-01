@@ -194,18 +194,6 @@ app.post(
     });
   }
 );
-app.get("/files/:id", (req, res) => {
-  const id = req.params.id;
-
-  imageUpload.findById(id, (err, file) => {
-    if (err) throw err;
-    if (!file) {
-      return res.status(404).send("File not found");
-    }
-    res.contentType(file.contentType);
-    res.send(file.data);
-  });
-});
 
 app.post("/UploadData", async (req, res) => {
   try {
@@ -217,6 +205,19 @@ app.post("/UploadData", async (req, res) => {
   } catch (err) {
     res.json({ status: "error", issue: err });
   }
+});
+
+app.get("/files/:id", (req, res) => {
+  const id = req.params.id;
+
+  imageUpload.findById(id, (err, file) => {
+    if (err) throw err;
+    if (!file) {
+      return res.status(404).send("File not found");
+    }
+    res.contentType(file.contentType);
+    res.send(file.data);
+  });
 });
 
 app.get("/getFiles", (req, res) => {
