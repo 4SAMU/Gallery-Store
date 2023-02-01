@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import Navbar from "../Navabar/Navbar";
 import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 import "./Profile.css";
+import jwt from "jwt-decode";
 
 const Profile = () => {
   const [selectedFile, setSelectedFile] = useState();
@@ -11,6 +12,15 @@ const Profile = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const token = localStorage.getItem("token");
+  const userd = jwt(token);
+
+  const [formParams, updateFormParams] = useState({
+    name: userd.name,
+    email: userd.email,
+    password: "",
+  });
 
   const [fileImage, setFile] = useState();
   function inputFileHandler(e) {
@@ -24,10 +34,13 @@ const Profile = () => {
     formData.append("file", file);
     try {
       setIsModalOpen(true);
-      const response = await fetch("https://gallery-store-api.vercel.app/avatar", {
-        method: "POST",
-        body: formData,
-      });
+      const response = await fetch(
+        "https://gallery-store-api.vercel.app/avatar",
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
 
       const data = await response.json();
       // console.log(data);
@@ -47,32 +60,34 @@ const Profile = () => {
     }
   }
 
-  async function updateUserData(event) {
+  async function updateUserData() {
+    const { name, email, password } = formParams;
     const token = localStorage.getItem("token");
     setIsModalOpen(true);
 
     const avatarUrl = await userAvatar();
-    event.preventDefault();
 
     if (!avatarUrl) {
       setIsModalOpen(false);
-      console.log(avatarUrl);
     } else {
       try {
         setIsModalOpen(true);
-        const response = await fetch("https://gallery-store-api.vercel.app/update", {
-          method: "PUT",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            name,
-            email,
-            password,
-            avatarUrl,
-            token,
-          }),
-        });
+        const response = await fetch(
+          "https://gallery-store-api.vercel.app/update",
+          {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              password,
+              avatarUrl,
+              token,
+            }),
+          }
+        );
 
         const data = await response.json();
         console.log(data);
@@ -117,25 +132,31 @@ const Profile = () => {
           className="input_updateprofile"
           type={"text"}
           placeholder="name"
-          id={name}
-          value={name}
-          onChange={(e) => setName(e.target.value)}
+          id={formParams.name}
+          value={formParams.name}
+          onChange={(e) =>
+            updateFormParams({ ...formParams, name: e.target.value })
+          }
         />
         <input
           className="input_updateprofile"
           type={"email"}
           placeholder="email"
-          id={email}
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          id={formParams.email}
+          value={formParams.email}
+          onChange={(e) =>
+            updateFormParams({ ...formParams, email: e.target.value })
+          }
         />
         <input
           className="input_updateprofile"
           type={"password"}
           placeholder="password"
-          id={password}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          id={formParams.password}
+          value={formParams.password}
+          onChange={(e) =>
+            updateFormParams({ ...formParams, password: e.target.value })
+          }
         />
         <button className="UpdateProfile_Btn" onClick={updateUserData}>
           Update
