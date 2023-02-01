@@ -23,13 +23,18 @@ const Home = () => {
     <div className="Page">
       <div className="Home_header_container">
         <p className="Home_header">Hello, {userd.name}</p>
-        <div
-          className="userImage"
-          onMouseEnter={() => setIsModalOpen(true)}
-          onClick={() => setIsModalOpen(!isModalOpen)}
-        >
-          <img src={samu} alt="" className="userImage" />
-        </div>
+        {isModalOpen ? (
+          <div
+            className="userImage"
+            onClick={() => setIsModalOpen(!isModalOpen)}
+          >
+            <img src={samu} alt="" className="userImage" />
+          </div>
+        ) : (
+          <div className="userImage" onClick={() => setIsModalOpen(true)}>
+            <img src={samu} alt="" className="userImage" />
+          </div>
+        )}
       </div>
       <div className="Story_status">
         <div className="Story_status_pics">
