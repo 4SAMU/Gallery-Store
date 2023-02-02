@@ -10,10 +10,13 @@ import { FiHeart } from "@react-icons/all-files/fi/FiHeart";
 import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
 import Modal from "../ModalPopup/Modal";
 import jwt from "jwt-decode";
+import Delete from "../DeleteData/Delete";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [uploadData, setUploadData] = useState([]);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   const token = localStorage.getItem("token");
   const userd = jwt(token);
@@ -40,13 +43,9 @@ const Home = () => {
       })
     );
     setUploadData(dataItems.reverse());
-    console.log("here", dataItems);
   }
 
-  const handleDoubleClick = () => {
-    alert("Double tap detected");
-  };
-
+  
   useEffect(() => {
     getFiles();
     const interval = setInterval(() => {
@@ -107,7 +106,13 @@ const Home = () => {
       <div className="many_pics_container">
         {uploadData.map((uploadItems, i) => {
           return (
-            <div key={i} onDoubleClick={handleDoubleClick}>
+            <div
+              key={i}
+              onDoubleClick={() => {
+                setDeleteModalOpen(!isDeleteModalOpen);
+                setSelectedImage(uploadItems.image);
+              }}
+            >
               <div className="pic_card">
                 <div className="myPic">
                   <img src={uploadItems.image} alt="" className="myPic" />
@@ -128,6 +133,11 @@ const Home = () => {
       </div>
       <Navbar />
       <Modal isOpen={isModalOpen} />
+      <Delete
+        deleteModal={isDeleteModalOpen}
+        imageToDelete={selectedImage}
+        closeModal={() => setDeleteModalOpen(false)}
+      />
     </div>
   );
 };
