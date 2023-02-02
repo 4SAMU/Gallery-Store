@@ -14,11 +14,9 @@ import jwt from "jwt-decode";
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [uploadData, setUploadData] = useState([]);
+
   const token = localStorage.getItem("token");
-
   const userd = jwt(token);
-
-  console.log(userd);
 
   async function getFiles() {
     const response = await fetch(
@@ -45,6 +43,10 @@ const Home = () => {
     console.log("here", dataItems);
   }
 
+  const handleDoubleClick = () => {
+    alert("Double tap detected");
+  };
+
   useEffect(() => {
     getFiles();
     const interval = setInterval(() => {
@@ -55,7 +57,6 @@ const Home = () => {
 
   return (
     <div className="Page">
-      
       <div className="Home_header_container">
         <p className="Home_header">Hello, {userd.name}</p>
         {isModalOpen ? (
@@ -106,7 +107,7 @@ const Home = () => {
       <div className="many_pics_container">
         {uploadData.map((uploadItems, i) => {
           return (
-            <div key={i}>
+            <div key={i} onDoubleClick={handleDoubleClick}>
               <div className="pic_card">
                 <div className="myPic">
                   <img src={uploadItems.image} alt="" className="myPic" />
