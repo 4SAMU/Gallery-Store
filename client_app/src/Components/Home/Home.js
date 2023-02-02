@@ -55,6 +55,7 @@ const Home = () => {
 
   return (
     <div className="Page">
+      
       <div className="Home_header_container">
         <p className="Home_header">Hello, {userd.name}</p>
         {isModalOpen ? (
@@ -107,12 +108,18 @@ const Home = () => {
           return (
             <div key={i}>
               <div className="pic_card">
-                <img src={uploadItems.image} alt="" className="myPic" />
-                <FiHeart className="likeBtn" />
-                <a href={uploadItems.image} download={uploadItems.image}>
-                  <BsDownload className="downloadBtn" />
-                </a>
-                <p className="caption">{uploadItems.caption}</p>
+                <div className="myPic">
+                  <img src={uploadItems.image} alt="" className="myPic" />
+                </div>
+                <div className="captionData">
+                  <p className="caption">{uploadItems.caption}</p>
+                </div>
+                <div className="data">
+                  <a href={uploadItems.image} download={uploadItems.image}>
+                    <BsDownload className="downloadBtn" />
+                  </a>
+                  <FiHeart className="likeBtn" />
+                </div>
               </div>
             </div>
           );

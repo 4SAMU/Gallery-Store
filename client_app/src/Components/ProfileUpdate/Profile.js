@@ -13,6 +13,8 @@ const Profile = () => {
   const token = localStorage.getItem("token");
   const userd = jwt(token);
 
+  console.log(userd)
+
   const [formParams, updateFormParams] = useState({
     name: userd.name,
     email: userd.email,
@@ -116,6 +118,11 @@ const Profile = () => {
           </div>
         ) : (
           <div className="UpdateProfile_imageArea">
+            <img
+              src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
+              alt=""
+              className="UpdateProfile_imageArea"
+            />
             <div className="image_icon">
               <input
                 type={"file"}
