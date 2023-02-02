@@ -3,10 +3,50 @@
 import React, { useState } from "react";
 import "./Delete.css";
 
-const Delete = ({ deleteModal, imageToDelete, closeModal }) => {
+const Delete = ({ deleteModal, closeModal, imageId, captionId }) => {
   const [formData, updateFormData] = useState({
     deleteText: "",
   });
+
+  async function deleteCaption() {
+    try {
+      const response = await fetch(
+        `https://gallery-store-api.vercel.app/deleteCaptionData/${captionId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function deleteImage() {
+    await deleteCaption();
+    try {
+      const response = await fetch(
+        `https://gallery-store-api.vercel.app/deleteImageUpload/${imageId}`,
+        {
+          method: "DELETE",
+          headers: {
+            "content-type": "application/json",
+          },
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      if (data.status === "ok") {
+        closeModal();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <div className={`Delete_component ${deleteModal ? "open" : "close"}`}>
@@ -16,7 +56,11 @@ const Delete = ({ deleteModal, imageToDelete, closeModal }) => {
 
       <div className="exandableDiv">
         <div className="imageForDelete">
-          <img className="myImage" src={imageToDelete} alt="" />
+          <img
+            className="myImage"
+            src={`https://gallery-store-api.vercel.app/files/${imageId}`}
+            alt=""
+          />
         </div>
       </div>
       <div className="expandableDiv">
@@ -38,7 +82,9 @@ const Delete = ({ deleteModal, imageToDelete, closeModal }) => {
       </div>
       {formData.deleteText === "DELETE" ? (
         <div className="expandableDiv">
-          <button className="deleteButton">Delete</button>
+          <button className="deleteButton" onClick={deleteImage}>
+            Delete
+          </button>
         </div>
       ) : (
         <div className="expandableDiv">

@@ -16,7 +16,8 @@ const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [uploadData, setUploadData] = useState([]);
-  const [selectedImage, setSelectedImage] = useState(null);
+  const [selectedImageId, setSelectedImageId] = useState(null);
+  const [selectedCaptionId, setSelectedCaptionId] = useState(null);
 
   const token = localStorage.getItem("token");
   const userd = jwt(token);
@@ -29,23 +30,26 @@ const Home = () => {
 
     const data = await response.json();
     const myData = data.files;
-
+    console.log(myData);
     const dataItems = await Promise.all(
       myData.map(async (index) => {
         const caption = index.caption;
         const image = `https://gallery-store-api.vercel.app/${index.image}`;
-
+        const captionId = index._id;
+        const imageId = index.image.slice(6);
         const items = {
           caption,
           image,
+          captionId,
+          imageId,
         };
         return items;
       })
     );
     setUploadData(dataItems.reverse());
+    console.log(dataItems);
   }
 
-  
   useEffect(() => {
     getFiles();
     const interval = setInterval(() => {
@@ -110,7 +114,8 @@ const Home = () => {
               key={i}
               onDoubleClick={() => {
                 setDeleteModalOpen(!isDeleteModalOpen);
-                setSelectedImage(uploadItems.image);
+                setSelectedImageId(uploadItems.imageId);
+                setSelectedCaptionId(uploadItems.captionId);
               }}
             >
               <div className="pic_card">
@@ -135,7 +140,8 @@ const Home = () => {
       <Modal isOpen={isModalOpen} />
       <Delete
         deleteModal={isDeleteModalOpen}
-        imageToDelete={selectedImage}
+        imageId={selectedImageId}
+        captionId={selectedCaptionId}
         closeModal={() => setDeleteModalOpen(false)}
       />
     </div>
