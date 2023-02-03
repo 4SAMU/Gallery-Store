@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import BabyThor from "../../assets/thor.png";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -27,12 +28,15 @@ const Login = () => {
 
     if (data.status === "ok") {
       localStorage.setItem("token", data.user);
-      alert("Login successful");
-      window.location.href = "/Home";
+      toast.success("Login successful");
+      setTimeout(function () {
+        // code to be executed after 3 seconds
+        window.location.href = "/Home";
+      }, 3000);
     } else if (data === "error") {
-      alert("account doent exist");
+      toast.error("account doent exist");
     } else {
-      alert("password provided does not match to email address");
+      toast.warn("password provided does not match to email address");
     }
   }
 

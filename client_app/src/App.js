@@ -8,6 +8,8 @@ import Login from "./Components/Login/Login";
 import Profile from "./Components/ProfileUpdate/Profile";
 import Signup from "./Components/Signup/Signup";
 import Upload from "./Components/UploadImage/Upload";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
   return (
@@ -20,6 +22,18 @@ const App = () => {
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/UploadPic" element={<Upload />}></Route>
       </Routes>
+      <ToastContainer
+        position="top-center"
+        autoClose={3000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="colored"
+      />
     </div>
   );
 };
