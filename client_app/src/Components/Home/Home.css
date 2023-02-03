@@ -65,7 +65,7 @@
   transform: translateY(-50%);
   transform: translateX(-50%);
   top: 1px;
-  background: #074763;
+  /* background: #074763; */
   border-radius: 50%;
 }
 
@@ -104,7 +104,7 @@
   transform: translateX(-50%);
   top: 5px;
   margin-top: 10px;
-  background: #074763;
+  /* background: #074763; */
   border-radius: 5px;
 }
 

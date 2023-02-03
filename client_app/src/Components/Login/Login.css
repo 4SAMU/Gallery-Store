@@ -6,7 +6,7 @@
   height: 100vh;
   top: 0;
   left: 0;
-  background: #0b3344;
+  /* background: #0b3344; */
 }
 
 .bg_login {
@@ -17,7 +17,7 @@
   top: 0px;
   border-radius: 0px 200px 200px 0px;
   border: 0ch;
-  background: #0e88bc;
+  /* background: #0e88bc; */
 }
 
 .login_container {

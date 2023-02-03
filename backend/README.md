@@ -1,66 +1,28 @@
 <!-- @format -->
 
-npm install nodemon express bcrypt jsonwebtoken multer path
+# Gallery store api
 
-```js
+This is a Node.js Express server application that provides authentication and image upload functionality.
 
-const file = req.body.file;
+The script first imports required dependencies:
 
-    console.log(file);
-    // Create a new MongoDB document with the file data
-    const newFile = new User({
-      contentType: file.mimetype,
-      data: file.buffer,
-    });
+    `dotenv` is used to load environment variables from a .env file.
+    `express` is used to build the server and handle HTTP requests.
+    `cors` is used to handle cross-origin resource sharing (CORS) requests.
+    `mongoose` is used to connect to and perform operations on a MongoDB database.
+    `jwt` is used to handle JSON Web Tokens (JWT) for authentication.
+    `bcryptjs` is used to hash and compare passwords securely.
+    `multer` is used to handle file uploads.
 
-    // newFile.save((err, savedFile) => {
-    //   if (err) throw err;
-    //   console.log("File inserted into MongoDB");
-    //   const fileUrl = `files/${savedFile._id}`;
-    //   console.log(fileUrl);
-    //   res.status(200).json({ fileUrl });
-    // });
+Then it defines an Express application, app, and sets up middlewares for handling incoming requests, such as JSON parsing and handling CORS. The script then connects to a MongoDB database using the MONGODB_URL environment variable.
 
+The application provides several endpoints for authentication and image upload functionality:
 
+    A `/register` endpoint to handle user registration and store user data in the MongoDB database.
+    A `/login` endpoint to handle user login and generate a JWT to be sent back to the client.
+    A `/update` endpoint to handle updating user information in the MongoDB database.
+    A `/avatar` endpoint to handle uploading an avatar image and storing it in the MongoDB database.
 
+The script makes use of MongoDB models to interact with the database, including `User`, `avatarImage`, `imageUpload`, and `imageCaption`. These models define the schema for the documents to be stored in the database.
 
-
-const token = req.body.tokenX;
-    console.log(token);
-    if (!token) {
-      return res.status(400).json({ status: "error", error: "Token missing" });
-    }
-
-    try {
-      const decoded = jwt.verify(token, "secret123");
-      const email = decoded.email;
-      const user = await User.findOne({ email: email });
-      if (!user) {
-        return res.json({ status: "error", error: "user not found" });
-      } else {
-        if (req.body.password) {
-          const newPassword = await bcrypt.hash(req.body.password, 10);
-          user.password = newPassword;
-        }
-        user.name = req.body.name;
-        user.email = req.body.email;
-        user.avatar = req.file ? req.file.filename : user.avatar;
-        // user.avatar = req.body.selectedFile;
-
-        await user.save();
-        const tokenUpdate = jwt.sign(
-          {
-            name: user.name,
-            email: user.email,
-            avatar: user.avatar,
-          },
-          "secret123"
-        );
-        res.json({ status: "ok", user: tokenUpdate });
-      }
-    } catch (error) {
-      console.log(error);
-      res.json({ status: "error", error: "invalid token" });
-    }
-  }
-```
+In the file upload endpoint, a `multer middleware` is used to handle file uploads. The uploaded file is then stored as a new document in the MongoDB database using the `avatarImage` model.
