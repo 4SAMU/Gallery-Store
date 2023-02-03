@@ -8,8 +8,10 @@ import { toast } from "react-toastify";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [busy, setBusy] = useState(false);
 
   async function loginUser(event) {
+    setBusy(true);
     event.preventDefault();
 
     const response = await fetch("https://gallery-store-api.vercel.app/login", {
@@ -35,8 +37,10 @@ const Login = () => {
       }, 3000);
     } else if (data === "error") {
       toast.error("account doent exist");
+      setBusy(false);
     } else {
       toast.warn("password provided does not match to email address");
+      setBusy(false);
     }
   }
 
