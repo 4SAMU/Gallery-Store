@@ -4,14 +4,18 @@ import React, { useState } from "react";
 import BabyThor from "../../assets/thor.png";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
+import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   async function loginUser(event) {
     setBusy(true);
+    setIsModalOpen(true);
+
     event.preventDefault();
 
     const response = await fetch("https://gallery-store-api.vercel.app/login", {
@@ -30,17 +34,20 @@ const Login = () => {
 
     if (data.status === "ok") {
       localStorage.setItem("token", data.user);
+
       toast.success("Login successful");
       setTimeout(function () {
         // code to be executed after 3 seconds
         window.location.href = "/Home";
       }, 3000);
     } else if (data === "error") {
+      setIsModalOpen(false);
+      setBusy(false);
       toast.error("account doent exist");
-      setBusy(false);
     } else {
-      toast.warn("password provided does not match to email address");
+      setIsModalOpen(false);
       setBusy(false);
+      toast.warn("password provided does not match to email address");
     }
   }
 
@@ -65,7 +72,7 @@ const Login = () => {
         />
 
         <button className="signinbtn" onClick={loginUser}>
-          SIGN IN
+          {busy ? "loading..." : " SIGN IN"}
         </button>
 
         <p className="donthaveAcc">don’t have an account?</p>
@@ -73,6 +80,7 @@ const Login = () => {
           <p className="donthaveAcc_p">Sign up</p>
         </Link>
       </div>
+      <TransclucentBg isOpen={isModalOpen} />
     </div>
   );
 };
