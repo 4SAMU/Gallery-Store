@@ -68,45 +68,40 @@ const Home = () => {
             onClick={() => setIsModalOpen(!isModalOpen)}
           >
             {userd.avatar === "samuel.png" ? (
-              <img src={samu} alt="" className="userImage" />
+              <div className="userImage">
+                {" "}
+                <img src={samu} alt="" className="images" />
+              </div>
             ) : (
-              <img
-                src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
-                alt=""
-                className="userImage"
-              />
+              <div className="userImage">
+                <img
+                  src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
+                  alt=""
+                  className="images"
+                />
+              </div>
             )}
           </div>
         ) : (
           <div className="userImage" onClick={() => setIsModalOpen(true)}>
             {userd.avatar === "samuel.png" ? (
-              <img src={samu} alt="" className="userImage" />
+              <div className="userImage">
+                {" "}
+                <img src={samu} alt="" className="images" />
+              </div>
             ) : (
-              <img
-                src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
-                alt=""
-                className="userImage"
-              />
+              <div className="userImage">
+                <img
+                  src={`https://gallery-store-api.vercel.app/${userd.avatar}`}
+                  alt=""
+                  className="images"
+                />
+              </div>
             )}
           </div>
         )}
       </div>
-      <div className="Story_status">
-        <div className="Story_status_pics">
-          <img src={Thor} alt="" className="status_pics" />
-        </div>
-        <div className="Story_status_pics">
-          <img src={Thor} alt="" className="status_pics" />
-        </div>
-        <div className="Story_status_pics">
-          <img src={Thor} alt="" className="status_pics" />
-        </div>
-        <div className="Story_status_pics">
-          <img src={Thor} alt="" className="status_pics" />
-        </div>
-      </div>
 
-      {/* {uploadData.map((data, index) => {})}*/}
       <div className="many_pics_container">
         {uploadData.map((uploadItems, i) => {
           return (
@@ -119,8 +114,10 @@ const Home = () => {
               }}
             >
               <div className="pic_card">
+                <img src={uploadItems.image} alt="" className="myPic" />
+
                 <div className="myPic">
-                  <img src={uploadItems.image} alt="" className="myPic" />
+                  <img src={uploadItems.image} alt="" className="many_images" />
                 </div>
                 <div className="captionData">
                   <p className="caption">{uploadItems.caption}</p>

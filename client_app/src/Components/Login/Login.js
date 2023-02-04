@@ -13,41 +13,56 @@ const Login = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   async function loginUser(event) {
-    setBusy(true);
-    setIsModalOpen(true);
-
-    event.preventDefault();
-
-    const response = await fetch("https://gallery-store-api.vercel.app/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        email,
-        password,
-      }),
-    });
-
-    const data = await response.json();
-    console.log("here", data);
-
-    if (data.status === "ok") {
-      localStorage.setItem("token", data.user);
-
-      toast.success("Login successful");
-      setTimeout(function () {
-        // code to be executed after 3 seconds
-        window.location.href = "/Home";
-      }, 3000);
-    } else if (data === "error") {
+    if (!email && !password) {
       setIsModalOpen(false);
       setBusy(false);
-      toast.error("account doent exist");
+      toast.warn("all fields must be filled");
     } else {
-      setIsModalOpen(false);
-      setBusy(false);
-      toast.warn("password provided does not match to email address");
+      try {
+        setBusy(true);
+        setIsModalOpen(true);
+
+        event.preventDefault();
+
+        const response = await fetch(
+          "https://gallery-store-api.vercel.app/login",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              email,
+              password,
+            }),
+          }
+        );
+
+        const data = await response.json();
+        console.log("here", data);
+
+        if (data.status === "ok") {
+          localStorage.setItem("token", data.user);
+
+          toast.success("Login successful");
+          setTimeout(function () {
+            // code to be executed after 3 seconds
+            window.location.href = "/Home";
+          }, 3000);
+        } else if (data === "error") {
+          setIsModalOpen(false);
+          setBusy(false);
+          toast.error("account doent exist");
+        } else {
+          setIsModalOpen(false);
+          setBusy(false);
+          toast.warn("password provided does not match to email address");
+        }
+      } catch (error) {
+        setIsModalOpen(false);
+        setBusy(false);
+        toast.warn(error);
+      }
     }
   }
 
