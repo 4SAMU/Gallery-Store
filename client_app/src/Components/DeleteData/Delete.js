@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import "./Delete.css";
+import { toast } from "react-toastify";
 
 const Delete = ({ deleteModal, closeModal, imageId, captionId }) => {
   const [formData, updateFormData] = useState({
@@ -21,8 +22,10 @@ const Delete = ({ deleteModal, closeModal, imageId, captionId }) => {
       );
       const data = await response.json();
       console.log(data);
+      toast.success(data.message);
     } catch (error) {
       console.log(error);
+      toast.success(error);
     }
   }
 

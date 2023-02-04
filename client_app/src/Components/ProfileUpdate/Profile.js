@@ -5,15 +5,17 @@ import Navbar from "../Navabar/Navbar";
 import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 import "./Profile.css";
 import jwt from "jwt-decode";
+import { toast } from "react-toastify";
 
 const Profile = () => {
+  const [busy, setBusy] = useState(false);
   const [selectedFile, setSelectedFile] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
+
   const token = localStorage.getItem("token");
   const userd = jwt(token);
 
-  console.log(userd)
+  console.log(userd);
 
   const [formParams, updateFormParams] = useState({
     name: userd.name,
@@ -31,45 +33,47 @@ const Profile = () => {
     const file = selectedFile;
     const formData = new FormData();
     formData.append("file", file);
-    try {
-      setIsModalOpen(true);
-      const response = await fetch(
-        "https://gallery-store-api.vercel.app/avatar",
-        {
-          method: "POST",
-          body: formData,
+    if (!file) {
+      toast.warn("select an image to continue");
+    } else {
+      try {
+        setIsModalOpen(true);
+        const response = await fetch(
+          "https://gallery-store-api.vercel.app/avatar",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
+
+        const data = await response.json();
+        // console.log(data);
+
+        if (data.status === "error") {
+          setIsModalOpen(false);
+          toast.warn(data.error);
         }
-      );
-
-      const data = await response.json();
-      // console.log(data);
-
-      if (data.status === "ok") {
-        // setIsModalOpen(false);
-        // window.location.replace("/Home");
-        console.log(data);
-      } else if (data.status === "error") {
+        return data.fileUrl;
+      } catch (error) {
         setIsModalOpen(false);
-        alert(data.error);
+        console.log(error);
       }
-      return data.fileUrl;
-    } catch (error) {
-      setIsModalOpen(false);
-      console.log(error);
     }
   }
 
   async function updateUserData() {
     const { name, email, password } = formParams;
     const token = localStorage.getItem("token");
-    setIsModalOpen(true);
 
     const avatarUrl = await userAvatar();
 
     if (!avatarUrl) {
+      // toast.warn("all fields must be filled");
+      setBusy(false);
       setIsModalOpen(false);
     } else {
       try {
+        setBusy(true);
         setIsModalOpen(true);
         const response = await fetch(
           "https://gallery-store-api.vercel.app/update",
@@ -93,17 +97,23 @@ const Profile = () => {
 
         if (data.status === "ok") {
           localStorage.setItem("token", data.user);
+          toast.success("Profile updated");
 
-          window.location.replace("/Home");
-          console.log(data);
+          setTimeout(function () {
+            // code to be executed after 3 seconds
+            window.location.href = "/Home";
+          }, 3000);
 
           // alert("status ok");
         } else if (data.status === "error") {
-          alert(data.error);
+          setIsModalOpen(false);
+          setBusy(false);
+          toast.error(data.error);
         }
       } catch (error) {
         setIsModalOpen(false);
-        console.log(error);
+        setBusy(false);
+        toast.error(data.error);
       }
     }
   }
@@ -163,7 +173,7 @@ const Profile = () => {
           }
         />
         <button className="UpdateProfile_Btn" onClick={updateUserData}>
-          Update
+          {busy ? "loading..." : " Update"}
         </button>
       </div>
       <Navbar />

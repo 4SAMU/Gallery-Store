@@ -5,10 +5,12 @@ import Navbar from "../Navabar/Navbar";
 import "./Upload.css";
 import "../ProfileUpdate/Profile.css";
 import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
+import { toast } from "react-toastify";
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [busy, setBusy] = useState(false);
   const [formParams, updateFormParams] = useState({
     caption: "",
   });
@@ -23,60 +25,73 @@ const Upload = () => {
     const file = selectedFile;
     const formData = new FormData();
     formData.append("file", file);
-    try {
-      setIsModalOpen(true);
+    if (!file) {
+      toast.warn("no image selected, click on image icon to select one");
+    } else {
+      try {
+        setIsModalOpen(true);
 
-      const response = await fetch(
-        "https://gallery-store-api.vercel.app/UploadImage",
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+        const response = await fetch(
+          "https://gallery-store-api.vercel.app/UploadImage",
+          {
+            method: "POST",
+            body: formData,
+          }
+        );
 
-      const data = await response.json();
-      console.log("here", data);
-      return data.fileUrl;
-    } catch (error) {
-      console.log(error);
-      setIsModalOpen(false);
+        const data = await response.json();
+        console.log("here", data);
+        return data.fileUrl;
+      } catch (error) {
+        console.log(error);
+        setIsModalOpen(false);
+      }
     }
   }
 
   async function uploadData() {
     const imageUrl = await uploadImage();
     const { caption } = formParams;
+    if (!caption) {
+      toast.warn("no caption endered!!");
+    } else {
+      try {
+        setBusy(true);
+        setIsModalOpen(true);
 
-    try {
-      setIsModalOpen(true);
+        const response = await fetch(
+          "https://gallery-store-api.vercel.app/UploadData",
+          {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+            },
+            body: JSON.stringify({
+              imageUrl,
+              caption,
+            }),
+          }
+        );
 
-      const response = await fetch(
-        "https://gallery-store-api.vercel.app/UploadData",
-        {
-          method: "POST",
-          headers: {
-            "content-type": "application/json",
-          },
-          body: JSON.stringify({
-            imageUrl,
-            caption,
-          }),
+        const data = await response.json();
+        console.log(data);
+
+        if (data.status === "ok") {
+          toast.success("file uploaded successfully");
+
+          setTimeout(function () {
+            // code to be executed after 3 seconds
+            window.location.href = "/Home";
+          }, 3000);
+        } else if (data.status === "error") {
+          setIsModalOpen(false);
+          setBusy(false);
+          toast(data.error);
         }
-      );
-
-      const data = await response.json();
-      console.log(data);
-
-      if (data.status === "ok") {
-        window.location.replace("/Home");
-
-        // alert("status ok");
-      } else if (data.status === "error") {
-        alert(data.error);
+      } catch (error) {
+        toast(data.error);
+        setIsModalOpen(false);
       }
-    } catch (error) {
-      console.log(error);
-      setIsModalOpen(false);
     }
   }
 
@@ -110,7 +125,7 @@ const Upload = () => {
           }
         />
         <button className="Upload_Btn" onClick={uploadData}>
-          Upload
+          {busy ? "loading..." : "Upload"}
         </button>
       </div>
       <TransclucentBg isOpen={isModalOpen} />

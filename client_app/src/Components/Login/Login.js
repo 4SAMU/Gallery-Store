@@ -21,7 +21,6 @@ const Login = () => {
       try {
         setBusy(true);
         setIsModalOpen(true);
-
         event.preventDefault();
 
         const response = await fetch(
