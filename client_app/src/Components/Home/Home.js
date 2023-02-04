@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import "./Home.css";
-import Thor from "../../assets/thorbaby.jpeg";
 import samu from "../../assets/samu.jpeg";
 import Navbar from "../Navabar/Navbar";
 
@@ -11,6 +10,7 @@ import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
 import Modal from "../ModalPopup/Modal";
 import jwt from "jwt-decode";
 import Delete from "../DeleteData/Delete";
+import { toast } from "react-toastify";
 
 const Home = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -111,6 +111,7 @@ const Home = () => {
                 setDeleteModalOpen(!isDeleteModalOpen);
                 setSelectedImageId(uploadItems.imageId);
                 setSelectedCaptionId(uploadItems.captionId);
+                toast.error("You have endered a danger zone");
               }}
             >
               <div className="pic_card">

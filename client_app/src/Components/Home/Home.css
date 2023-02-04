@@ -107,9 +107,7 @@
   transform: translateY(-50%);
   transform: translateX(-50%);
   top: 0px;
-  background: transparent;
   backdrop-filter: blur(10px);
-
 }
 
 .likeBtn {
