@@ -37,6 +37,7 @@ const Profile = () => {
       toast.warn("select an image to continue");
     } else {
       try {
+        setBusy(true);
         setIsModalOpen(true);
         const response = await fetch(
           "https://gallery-store-api.vercel.app/avatar",
@@ -50,13 +51,15 @@ const Profile = () => {
         // console.log(data);
 
         if (data.status === "error") {
+          setBusy(false);
           setIsModalOpen(false);
           toast.warn(data.error);
         }
         return data.fileUrl;
       } catch (error) {
         setIsModalOpen(false);
-        console.log(error);
+        setBusy(false);
+        toast.warn(error);
       }
     }
   }
