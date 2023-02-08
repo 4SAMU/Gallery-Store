@@ -13,10 +13,6 @@
   object-fit: contain;
 }
 
-.image_blur_effect {
-  backdrop-filter: blur(15px);
-}
-
 .Home_header_container {
   position: absolute;
   width: 95vw;
@@ -72,9 +68,6 @@
   .many_pics_container {
     top: 26vh;
   }
-  .Story_status {
-    top: 10.5vh;
-  }
 }
 
 .pic_card {
@@ -86,28 +79,16 @@
   transform: translateX(-50%);
   top: 5px;
   margin-top: 10px;
-  /* background: #074763; */
+  background: transparent;
   border-radius: 5px;
+  border-bottom: 1px solid #fffbfb;
 }
 
 .data {
-  position: absolute;
   width: 100%;
   height: 50px;
   background: transparent;
-  bottom: 0px;
   backdrop-filter: blur(15px);
-}
-
-.myPic {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  left: 50%;
-  transform: translateY(-50%);
-  transform: translateX(-50%);
-  top: 0px;
-  backdrop-filter: blur(10px);
 }
 
 .likeBtn {
@@ -140,8 +121,6 @@
 }
 
 .captionData {
-  position: absolute;
-  bottom: 34px;
   left: 0px;
   width: 100%;
   backdrop-filter: blur(25px);
@@ -153,16 +132,4 @@
   padding: 5px;
   color: #fffbfb;
   font-style: italic;
-}
-
-/*==============*/
-.button_container {
-  position: fixed;
-  z-index: 4px;
-  bottom: 0px;
-  width: 100vw;
-  height: 50px;
-  background-color: transparent;
-  backdrop-filter: blur(4px);
-  color: #fffbfb;
 }

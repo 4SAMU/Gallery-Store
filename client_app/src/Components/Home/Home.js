@@ -114,12 +114,8 @@ const Home = () => {
                 toast.error("You have entered a danger zone");
               }}
             >
-              {/* <div className="pic_card">
-                <img src={uploadItems.image} alt="" className="myPic" />
-
-                <div className="myPic">
-                  <img src={uploadItems.image} alt="" className="many_images" />
-                </div>
+              <div className="pic_card">
+                <img src={uploadItems.image} alt="" className="many_images" />
                 <div className="captionData">
                   <p className="caption">{uploadItems.caption}</p>
                 </div>
@@ -129,11 +125,6 @@ const Home = () => {
                   </a>
                   <FiHeart className="likeBtn" />
                 </div>
-              </div>*/}
-              <div className="pic_card">
-                <img src={uploadItems.image} alt="" className="many_images" />
-                <div className="button_container">hello</div>
-                <div className="button_container">hello</div>
               </div>
             </div>
           );
