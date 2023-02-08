@@ -54,7 +54,7 @@ const Delete = ({ deleteModal, closeModal, imageId, captionId }) => {
   return (
     <div className={`Delete_component ${deleteModal ? "open" : "close"}`}>
       <div className="expandableDiv">
-        <div className="contentText">You have entered a danger Zone.</div>
+        <div className="contentText">You have entered a danger zone.</div>
       </div>
 
       <div className="exandableDiv">

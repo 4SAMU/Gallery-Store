@@ -111,7 +111,7 @@ const Home = () => {
                 setDeleteModalOpen(!isDeleteModalOpen);
                 setSelectedImageId(uploadItems.imageId);
                 setSelectedCaptionId(uploadItems.captionId);
-                toast.error("You have endered a danger zone");
+                toast.error("You have entered a danger zone");
               }}
             >
               {/* <div className="pic_card">
