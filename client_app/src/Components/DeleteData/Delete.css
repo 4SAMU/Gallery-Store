@@ -5,13 +5,15 @@
   width: 85vw;
   height: 490px;
 
-  background: #0b3344;
-  border: 1px solid #fff;
+  background: black;
+  /* border: 1px solid #fff; */
   border-radius: 4px;
 
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+  backdrop-filter: blur(10px);
+
 }
 
 .Delete_component.open {
@@ -83,7 +85,7 @@
   position: relative;
   width: 220px;
   height: 35px;
-  background-color: #0e88bc;
+  background-color: #55595a;
   color: #fff;
   margin-top: 20px;
   border: 0ch;

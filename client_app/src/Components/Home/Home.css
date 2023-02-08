@@ -80,7 +80,7 @@
 .pic_card {
   position: relative;
   width: 100vw;
-  height: 81vh;
+  height: auto;
   left: 50%;
   transform: translateY(-50%);
   transform: translateX(-50%);
@@ -153,4 +153,16 @@
   padding: 5px;
   color: #fffbfb;
   font-style: italic;
+}
+
+/*==============*/
+.button_container {
+  position: fixed;
+  z-index: 4px;
+  bottom: 0px;
+  width: 100vw;
+  height: 50px;
+  background-color: transparent;
+  backdrop-filter: blur(4px);
+  color: #fffbfb;
 }
