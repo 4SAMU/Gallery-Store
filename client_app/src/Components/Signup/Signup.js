@@ -44,7 +44,6 @@ const Signup = () => {
       );
 
       const data = await response.json();
-      console.log(data);
 
       if (data.status === "ok") {
         toast.success("account created successfully");

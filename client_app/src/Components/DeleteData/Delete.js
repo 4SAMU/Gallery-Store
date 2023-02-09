@@ -21,10 +21,8 @@ const Delete = ({ deleteModal, closeModal, imageId, captionId }) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       toast.success(data.message);
     } catch (error) {
-      console.log(error);
       toast.success(error);
     }
   }
@@ -42,12 +40,10 @@ const Delete = ({ deleteModal, closeModal, imageId, captionId }) => {
         }
       );
       const data = await response.json();
-      console.log(data);
       if (data.status === "ok") {
         closeModal();
       }
     } catch (error) {
-      console.log(error);
     }
   }
 

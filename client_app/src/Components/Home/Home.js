@@ -27,11 +27,9 @@ const Home = () => {
     const response = await fetch(
       "https://gallery-store-api.vercel.app/getFiles"
     );
-    // console.log(response);
 
     const data = await response.json();
     const myData = data.files;
-    console.log(myData);
     const dataItems = await Promise.all(
       myData.map(async (index) => {
         const caption = index.caption;
@@ -48,7 +46,6 @@ const Home = () => {
       })
     );
     setUploadData(dataItems.reverse());
-    console.log(dataItems);
   }
 
   const handleDownload = async (url, imageId) => {

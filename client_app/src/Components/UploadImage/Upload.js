@@ -40,10 +40,8 @@ const Upload = () => {
         );
 
         const data = await response.json();
-        console.log("here", data);
         return data.fileUrl;
       } catch (error) {
-        console.log(error);
         setIsModalOpen(false);
       }
     }
@@ -74,7 +72,6 @@ const Upload = () => {
         );
 
         const data = await response.json();
-        console.log(data);
 
         if (data.status === "ok") {
           toast.success("file uploaded successfully");
