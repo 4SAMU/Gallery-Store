@@ -50,6 +50,21 @@ const Home = () => {
     console.log(dataItems);
   }
 
+  const handleDownload = async (url) => {
+    const link = document.createElement("a");
+    link.href = await toDataURL(url);
+    link.download = "myImage.png";
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
+
+  const toDataURL = async (url) => {
+    const response = await fetch(url);
+    const blob = await response.blob();
+    return URL.createObjectURL(blob);
+  };
+
   useEffect(() => {
     getFiles();
     const interval = setInterval(() => {
@@ -120,9 +135,10 @@ const Home = () => {
                   <p className="caption">{uploadItems.caption}</p>
                 </div>
                 <div className="data">
-                  <a href={uploadItems.image} download={uploadItems.image}>
-                    <BsDownload className="downloadBtn" />
-                  </a>
+                  <BsDownload
+                    className="downloadBtn"
+                    onClick={() => handleDownload(uploadItems.image)}
+                  />
                   <FiHeart className="likeBtn" />
                 </div>
               </div>
