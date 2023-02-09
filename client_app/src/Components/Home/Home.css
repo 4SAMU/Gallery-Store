@@ -158,7 +158,7 @@
   animation: move 2s linear infinite;
   display: inline-block;
   white-space: nowrap;
-  font-size: larger;
+  font-size: xx-large;
 }
 
 .dot {
