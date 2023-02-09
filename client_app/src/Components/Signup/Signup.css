@@ -53,6 +53,53 @@
   outline: 0ch;
 }
 
+.password_input_container {
+  position: relative;
+  width: 200px;
+  height: 35px;
+  left: 50%;
+  transform: translateY(-50%);
+  transform: translateX(-50%);
+  top: 55px;
+  margin-top: 24px;
+  color: #ffffff;
+  padding-left: 10px;
+}
+
+.password_input {
+  position: absolute;
+  width: 156px;
+  height: 35px;
+  left: 0px;
+  top: 0;
+  background: transparent;
+  border-radius: 4px 0 0 4px;
+  color: #ffffff;
+  padding-left: 10px;
+  outline: 0ch;
+  border: 0ch;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-left: 1px solid #d9d9d9;
+}
+
+.show_hide {
+  position: absolute;
+  width: 30px;
+  height: 37px;
+  right: 0px;
+  top: 0;
+  background: transparent;
+  border-radius: 0 4px 4px 0;
+  color: #ffffff;
+  padding-left: 10px;
+  outline: 0ch;
+  border: 0ch;
+  border-top: 1px solid #d9d9d9;
+  border-bottom: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+}
+
 .signupbtn {
   position: relative;
   width: 215px;
@@ -110,4 +157,14 @@
   height: 20px;
   right: 30px;
   top: 7.5px;
+}
+
+.show_hide_icon {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 20px;
+  color: #f5f5f5;
+  cursor: pointer;
 }

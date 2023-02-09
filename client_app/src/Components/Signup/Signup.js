@@ -7,6 +7,8 @@ import Google from "../../assets/google.png";
 import "./Signup.css";
 import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 import { toast } from "react-toastify";
+import { AiOutlineEye } from "@react-icons/all-files/ai/AiOutlineEye";
+import { AiOutlineEyeInvisible } from "@react-icons/all-files/ai/AiOutlineEyeInvisible";
 
 const Signup = () => {
   const [name, setName] = useState("");
@@ -80,14 +82,24 @@ const Signup = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          className="signup_input"
-          type={showPassword ? "text" : "password"}
-          placeholder="password"
-          id={password}
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="password_input_container">
+          <input
+            className="password_input"
+            type={showPassword ? "text" : "password"}
+            placeholder="password"
+            id={password}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="show_hide">
+            <span
+              className="show_hide_icon"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <AiOutlineEye />:<AiOutlineEyeInvisible /> }
+            </span>
+          </div>
+        </div>
         <button className="signupbtn" onClick={registerUser}>
           {busy ? "loading..." : " SIGN UP"}
         </button>
@@ -95,8 +107,8 @@ const Signup = () => {
           className="signupbtn"
           onClick={() => setShowPassword(!showPassword)}
         >
-          {showPassword ? "Hide" : "Show"} password
-          {/*<img src={Google} alt="" className="googleIcon" />*/}
+          signup with
+          <img src={Google} alt="" className="googleIcon" />
         </button>
         <p className="alreadyhaveAcc">already have an account?</p>
         <Link to={"/Login"}>
