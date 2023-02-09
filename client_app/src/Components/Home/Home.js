@@ -18,6 +18,7 @@ const Home = () => {
   const [uploadData, setUploadData] = useState([]);
   const [selectedImageId, setSelectedImageId] = useState(null);
   const [selectedCaptionId, setSelectedCaptionId] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const token = localStorage.getItem("token");
   const userd = jwt(token);
@@ -51,12 +52,14 @@ const Home = () => {
   }
 
   const handleDownload = async (url, imageId) => {
+    setLoading(true);
     const link = document.createElement("a");
     link.href = await toDataURL(url);
     link.download = `Gallery-store_${imageId}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+    setLoading(false);
   };
 
   const toDataURL = async (url) => {
@@ -135,12 +138,21 @@ const Home = () => {
                   <p className="caption">{uploadItems.caption}</p>
                 </div>
                 <div className="data">
-                  <BsDownload
-                    className="downloadBtn"
-                    onClick={() =>
-                      handleDownload(uploadItems.image, uploadItems.imageId)
-                    }
-                  />
+                  {!loading ? (
+                    <BsDownload
+                      className="downloadBtn"
+                      onClick={() =>
+                        handleDownload(uploadItems.image, uploadItems.imageId)
+                      }
+                    />
+                  ) : (
+                    <div className="dots_loader">
+                      <span className="dot">.</span>
+                      <span className="dot">.</span>
+                      <span className="dot">.</span>
+                      <span className="dot">.</span>
+                    </div>
+                  )}
                   <FiHeart className="likeBtn" />
                 </div>
               </div>

@@ -133,3 +133,39 @@
   color: #fffbfb;
   font-style: italic;
 }
+
+/*===================dots loader====================*/
+
+@keyframes move {
+  0% {
+    transform: translateX(-10%);
+  }
+  100% {
+    transform: translateX(120%);
+  }
+}
+
+.dots_loader {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 25px;
+  height: 25px;
+  cursor: pointer;
+  color: #15ad4f;
+  background: none;
+  border: 0ch;
+  animation: move 2s linear infinite;
+  display: inline-block;
+  white-space: nowrap;
+  font-size: larger;
+}
+
+.dot {
+  animation-delay: 0.3s;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: move;
+  display: inline-block;
+  transform-origin: 50% 50%;
+}
