@@ -26,7 +26,7 @@ const Upload = () => {
     const formData = new FormData();
     formData.append("file", file);
     if (!file) {
-      toast.warn("no image selected, click on image icon to select one");
+      toast.warn("No image selected, click on image icon to select one");
     } else {
       try {
         setIsModalOpen(true);
@@ -53,7 +53,7 @@ const Upload = () => {
     const imageUrl = await uploadImage();
     const { caption } = formParams;
     if (!caption) {
-      toast.warn("no caption endered!!");
+      toast.warn("No caption entered!!");
     } else {
       try {
         setBusy(true);
