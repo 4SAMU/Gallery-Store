@@ -14,6 +14,7 @@ const Signup = () => {
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function registerUser(event) {
     if (!name && !email && !password) {
@@ -81,7 +82,7 @@ const Signup = () => {
         />
         <input
           className="signup_input"
-          type={"password"}
+          type={showPassword ? "text" : "password"}
           placeholder="password"
           id={password}
           value={password}
@@ -90,9 +91,12 @@ const Signup = () => {
         <button className="signupbtn" onClick={registerUser}>
           {busy ? "loading..." : " SIGN UP"}
         </button>
-        <button className="signupbtn">
-          sign up with
-          <img src={Google} alt="" className="googleIcon" />
+        <button
+          className="signupbtn"
+          onClick={() => setShowPassword(!showPassword)}
+        >
+          {showPassword ? "Hide" : "Show"} password
+          {/*<img src={Google} alt="" className="googleIcon" />*/}
         </button>
         <p className="alreadyhaveAcc">already have an account?</p>
         <Link to={"/Login"}>
