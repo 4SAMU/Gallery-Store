@@ -5,12 +5,15 @@ import BabyThor from "../../assets/thor.png";
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
+import { AiOutlineEye } from "@react-icons/all-files/ai/AiOutlineEye";
+import { AiOutlineEyeInvisible } from "@react-icons/all-files/ai/AiOutlineEyeInvisible";
 
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [busy, setBusy] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
 
   async function loginUser(event) {
     if (!email && !password) {
@@ -77,13 +80,24 @@ const Login = () => {
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-        <input
-          className="login_input"
-          type={"password"}
-          placeholder="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className="password_input_container">
+          <input
+            className="password_input"
+            type={showPassword ? "text" : "password"}
+            placeholder="password"
+            id={password}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <div className="show_hide">
+            <span
+              className="show_hide_icon"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <AiOutlineEye /> : <AiOutlineEyeInvisible />}
+            </span>
+          </div>
+        </div>
 
         <button className="signinbtn" onClick={loginUser}>
           {busy ? "loading..." : " SIGN IN"}
