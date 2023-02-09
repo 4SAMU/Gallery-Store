@@ -50,10 +50,10 @@ const Home = () => {
     console.log(dataItems);
   }
 
-  const handleDownload = async (url) => {
+  const handleDownload = async (url, imageId) => {
     const link = document.createElement("a");
     link.href = await toDataURL(url);
-    link.download = "myImage.png";
+    link.download = `Gallery-store_${imageId}`;
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -137,7 +137,9 @@ const Home = () => {
                 <div className="data">
                   <BsDownload
                     className="downloadBtn"
-                    onClick={() => handleDownload(uploadItems.image)}
+                    onClick={() =>
+                      handleDownload(uploadItems.image, uploadItems.imageId)
+                    }
                   />
                   <FiHeart className="likeBtn" />
                 </div>
