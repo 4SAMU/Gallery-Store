@@ -6,8 +6,23 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="shortcut icon" href="%PUBLIC_URL%/thorbaby.jpeg" />
+    <link rel="manifest" href="/manifest.json" />
 
     <title>Gallery Store</title>
+    <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker
+            .register("/sw.js")
+            .then(function (registration) {
+              console.log("[Service Worker] Registered");
+            })
+            .catch(function (error) {
+              console.error("[Service Worker] Registration failed:", error);
+            });
+        });
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
