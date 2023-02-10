@@ -31,7 +31,7 @@ textArea:active {
   color: #fff;
   left: 50%;
   transform: translateX(-50%);
-  background: rgb(29, 28, 28);
+  background: #465a33;
   backdrop-filter: blur(15px);
   text-align: center;
   padding-top: 8px;
