@@ -22,3 +22,20 @@ textArea:hover,
 textArea:active {
   border: 1px solid #17bd56;
 }
+
+.offline {
+  position: absolute;
+  width: 200px;
+  height: 25px;
+  top: 10px;
+  color: #fff;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgb(29, 28, 28);
+  backdrop-filter: blur(15px);
+  text-align: center;
+  padding-top: 8px;
+  border-radius: 5px;
+  font-style: italic;
+  font-size: 15px;
+}

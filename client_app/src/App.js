@@ -1,6 +1,6 @@
 /** @format */
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Route, Routes } from "react-router-dom";
 import Home from "./Components/Home/Home";
 import Loading from "./Components/loaderBeforeStart/Loading";
@@ -9,9 +9,22 @@ import Profile from "./Components/ProfileUpdate/Profile";
 import Signup from "./Components/Signup/Signup";
 import Upload from "./Components/UploadImage/Upload";
 import { ToastContainer } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const App = () => {
+  const [online, setOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    window.addEventListener("online", () => setOnline(true));
+    window.addEventListener("offline", () => setOnline(false));
+
+    return () => {
+      window.removeEventListener("online", () => setOnline(true));
+      window.removeEventListener("offline", () => setOnline(false));
+    };
+  }, []);
+
   return (
     <div>
       <Routes>
@@ -34,6 +47,7 @@ const App = () => {
         pauseOnHover
         theme="colored"
       />
+      {online ? "" : <div className="offline"> you are offline!!</div>}
     </div>
   );
 };
