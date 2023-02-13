@@ -1,0 +1,140 @@
+/** @format */
+
+.joinChat {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background: transparent;
+  backdrop-filter: blur(2px);
+}
+
+.joinChat_box {
+  position: absolute;
+  width: 200px;
+  height: 100px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+
+  background: #716e6e;
+  padding-left: 20px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+.joinChat_btn {
+  position: absolute;
+  width: 29px;
+  height: 24px;
+  bottom: 10px;
+  right: 10px;
+  color: #17bd56;
+  cursor: pointer;
+}
+
+.joinChat_btn:active {
+  color: #10cedb;
+}
+
+.joinChat.open {
+  display: block;
+}
+
+.joinChat.close {
+  display: none;
+}
+
+/*======================================*/
+
+.msg_container {
+  position: absolute;
+  width: 340px;
+  height: 550px;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, -50%);
+  border: 1px solid #716e6e;
+
+  background: rgb(20, 20, 20);
+}
+
+.msg_room {
+  position: relative;
+  width: 340px;
+  height: 500px;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow-y: scroll;
+  overflow-x: hidden;
+  color: white;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  margin-top: 10px;
+}
+
+.msg_input {
+  position: absolute;
+  width: 290px;
+  height: 50px;
+  bottom: 0;
+  left: 0;
+  /* background: red; */
+  outline: 0;
+  border: 0ch;
+  /* color: white; */
+  padding-left: 15px;
+  font-size: 18px;
+}
+
+.msg_input:active,
+.msg_input:hover {
+  outline: 0ch;
+  border: 0ch;
+}
+
+.sendBtn {
+  position: absolute;
+  width: 46px;
+  height: 52px;
+  bottom: 0;
+  right: 0;
+  /* background: red; */
+  border: 0ch;
+  outline: 0;
+  border-left: 1px dotted #716e6e;
+  font-size: 20px;
+}
+
+.sendBtn:active {
+  color: #17bd56;
+}
+
+
+
+#you .message_content {
+  position: relative;
+  background: #3d5f61;
+  width: auto;
+  min-width: 50px;
+  max-width: 200px;
+  min-height: 50px;
+  max-height: max-content;
+  margin-left: 4px;
+  padding-left: 4px;
+  padding-top: 4px;
+  border-radius: 0 10px 10px 10px;
+  left: 0;
+}
+
+#other  .message_content {
+  position: relative;
+  background: #585d5e;
+  width: 200px;
+  min-height: 50px;
+  max-height: max-content;
+  padding-left: 4px;
+  padding-top: 4px;
+  border-radius: 10px 0 10px 10px;
+  left: 38%;
+}

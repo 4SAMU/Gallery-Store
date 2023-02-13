@@ -1,3 +1,5 @@
+/** @format */
+
 // In a separate JavaScript file, e.g. sw.js
 
 self.addEventListener("install", function (event) {

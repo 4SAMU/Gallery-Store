@@ -9,8 +9,8 @@ import Profile from "./Components/ProfileUpdate/Profile";
 import Signup from "./Components/Signup/Signup";
 import Upload from "./Components/UploadImage/Upload";
 import { ToastContainer } from "react-toastify";
-import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import JoinChat from "./Components/Messaging/JoinChat";
 
 const App = () => {
   const [online, setOnline] = useState(navigator.onLine);
@@ -34,6 +34,7 @@ const App = () => {
         <Route path="/Home" element={<Home />}></Route>
         <Route path="/Profile" element={<Profile />}></Route>
         <Route path="/UploadPic" element={<Upload />}></Route>
+        <Route path="/Messaging" element={<JoinChat />}></Route>
       </Routes>
       <ToastContainer
         position="top-center"
