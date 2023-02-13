@@ -6,13 +6,11 @@ import { MdSend } from "@react-icons/all-files/md/MdSend";
 import Navbar from "../Navabar/Navbar";
 import ScrollToBottom from "react-scroll-to-bottom";
 
-
 const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
- 
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
@@ -60,6 +58,7 @@ const Messaging = ({ socket, room, username }) => {
         <input
           className="msg_input"
           placeholder="hey..."
+          value={currentMessage}
           onChange={(event) => {
             setCurrentMessage(event.target.value);
           }}

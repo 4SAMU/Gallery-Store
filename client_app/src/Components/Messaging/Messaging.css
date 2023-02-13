@@ -110,8 +110,6 @@
   color: #17bd56;
 }
 
-
-
 #you .message_content {
   position: relative;
   background: #3d5f61;
@@ -124,10 +122,10 @@
   padding-left: 4px;
   padding-top: 4px;
   border-radius: 0 10px 10px 10px;
-  left: 0;
+  left: 38%;
 }
 
-#other  .message_content {
+#other .message_content {
   position: relative;
   background: #585d5e;
   width: 200px;
@@ -136,5 +134,6 @@
   padding-left: 4px;
   padding-top: 4px;
   border-radius: 10px 0 10px 10px;
-  left: 38%;
+  left: 0;
+  margin-left: 4px;
 }
