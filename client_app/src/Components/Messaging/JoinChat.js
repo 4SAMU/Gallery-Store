@@ -1,11 +1,11 @@
 /** @format */
 
-import React, {  useState } from "react";
+import React, { useState } from "react";
 import "./Messaging.css";
 import jwt from "jwt-decode";
 import io from "socket.io-client";
 import Messaging from "./Messaging";
-const socket = io.connect("http://localhost:5000");
+const socket = io.connect(`https://messaging-api-pi.vercel.app`);
 
 const room = 1;
 
