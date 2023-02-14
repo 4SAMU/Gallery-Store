@@ -15,7 +15,6 @@
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
-
   background: #716e6e;
   padding-left: 20px;
   color: #fff;
@@ -136,4 +135,27 @@
   border-radius: 10px 0 10px 10px;
   left: 0;
   margin-left: 4px;
+}
+
+.message_content_meta {
+  position: absolute;
+  padding-left: 0;
+  bottom: -2px;
+  width: 200px;
+  height: 10px;
+  color: #fff;
+  font-size: xx-small;
+  /* display: flex; */
+  justify-content: space-between;
+}
+
+.time {
+  position: absolute;
+  right: 6px;
+  
+}
+
+.name {
+  position: absolute;
+  left: 6px;
 }

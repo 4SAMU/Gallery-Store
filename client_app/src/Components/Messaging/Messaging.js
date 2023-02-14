@@ -65,7 +65,13 @@ const Messaging = ({ socket, room, username }) => {
                 key={i}
                 id={username === messageContent.author ? "you" : "other"}
               >
-                <div className="message_content">{messageContent.message}</div>
+                <div className="message_content">
+                  {messageContent.message}
+                  <div className="message_content_meta">
+                    <p className="name">{messageContent.author}</p>
+                    <p className="time">{messageContent.time}</p>
+                  </div>
+                </div>
                 <br />
               </div>
             );
