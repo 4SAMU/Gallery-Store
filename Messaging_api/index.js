@@ -5,17 +5,17 @@ const app = express();
 const https = require("https");
 const cors = require("cors");
 const { Server } = require("socket.io");
-const fs = require("fs");
+// const fs = require("fs");
 app.use(cors());
 
 const { PORT } = process.env;
 
-const options = {
-  key: fs.readFileSync("./cert/key.pem"),
-  cert: fs.readFileSync("./cert/cert.pem"),
-};
+// const options = {
+//   key: fs.readFileSync("./cert/key.pem"),
+//   cert: fs.readFileSync("./cert/cert.pem"),
+// };
 
-const server = https.createServer(options, app);
+const server = https.createServer( app);
 
 const io = new Server(server, {
   cors: {
