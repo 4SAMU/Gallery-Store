@@ -5,7 +5,7 @@ import "./Messaging.css";
 import jwt from "jwt-decode";
 import io from "socket.io-client";
 import Messaging from "./Messaging";
-const socket = io.connect(`https://messaging-api-pi.vercel.app`);
+const socket = io.connect(`https://messaging-api-pi.vercel.app`, {});
 
 const room = 1;
 
