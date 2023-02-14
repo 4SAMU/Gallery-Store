@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import "./Messaging.css";
 import jwt from "jwt-decode";
 import io from "socket.io-client";

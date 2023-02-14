@@ -37,11 +37,13 @@ const Messaging = ({ socket, room, username }) => {
     socket.emit("connect_user", username);
 
     // Listen for the user_connected event from the server
-    socket.off("user_connected");
+    socket.off("connect_user");
     socket.on("user_connected", (user) => {
-      toast.info(`${user} is online`);
+      if (user !== username) {
+        toast.info(`${user} is online`);
+      }
     });
-  }, [socket, username]);
+  }, [socket]);
 
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messageList));
