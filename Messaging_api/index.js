@@ -2,14 +2,20 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const http = require("http");
+const https = require("https");
 const cors = require("cors");
 const { Server } = require("socket.io");
+const fs = require("fs");
 app.use(cors());
 
 const { PORT } = process.env;
 
-const server = http.createServer(app);
+const options = {
+  key: fs.readFileSync("./cert/key.pem"),
+  cert: fs.readFileSync("./cert/cert.pem"),
+};
+
+const server = https.createServer(options, app);
 
 const io = new Server(server, {
   cors: {
@@ -36,7 +42,6 @@ io.on("connection", (socket) => {
 
   socket.on("send_message", (data) => {
     socket.to(data.room).emit("receive_message", data);
-    console.log("data\n ::::", data);
   });
 
   socket.on("disconnect", () => {

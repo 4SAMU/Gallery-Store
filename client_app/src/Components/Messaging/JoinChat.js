@@ -6,11 +6,8 @@ import jwt from "jwt-decode";
 import Messaging from "./Messaging";
 
 const { io } = require("socket.io-client");
-const socket = io.connect("localhost:5000", {
-  extraHeaders: {
-    "my-custom-header": "abcd",
-  },
-});
+const socket = io.connect("https://messaging-api-pi.vercel.app/", {});
+console.log(socket.id);
 
 const room = 1;
 
