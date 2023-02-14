@@ -1,11 +1,11 @@
 /** @format */
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Messaging.css";
 import jwt from "jwt-decode";
 import io from "socket.io-client";
 import Messaging from "./Messaging";
-const socket = io.connect("http://localhost:3001");
+const socket = io.connect("http://localhost:5000");
 
 const room = 1;
 
@@ -15,7 +15,7 @@ const JoinChat = () => {
   const token = localStorage.getItem("token");
   const userd = jwt(token);
 
-  const joinRoom = () => {
+  const joinRoom = async () => {
     if (userd) {
       socket.emit("join_room", room);
       setShowChat(true);

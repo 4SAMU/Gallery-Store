@@ -67,11 +67,7 @@ const Home = () => {
 
   useEffect(() => {
     getFiles();
-    const interval = setInterval(() => {
-      getFiles();
-    }, 10000);
-    return () => clearInterval(interval);
-  }, []);
+  }, [uploadData]);
 
   return (
     <div className="Page">
