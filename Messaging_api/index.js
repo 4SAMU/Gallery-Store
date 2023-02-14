@@ -2,7 +2,7 @@
 require("dotenv").config();
 const express = require("express");
 const app = express();
-const https = require("https");
+const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
 // const fs = require("fs");
@@ -10,12 +10,7 @@ app.use(cors());
 
 const { PORT } = process.env;
 
-// const options = {
-//   key: fs.readFileSync("./cert/key.pem"),
-//   cert: fs.readFileSync("./cert/cert.pem"),
-// };
-
-const server = https.createServer( app);
+const server = http.createServer(app);
 
 const io = new Server(server, {
   cors: {
