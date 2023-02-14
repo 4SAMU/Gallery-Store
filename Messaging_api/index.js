@@ -11,7 +11,10 @@ const { PORT } = process.env;
 
 const server = http.createServer(app);
 
-const io = new Server(server);
+const io = new Server(server, {
+  origins:
+    "https://gallery-store.vercel.app:* https://gallery-store.vercel.app:*",
+});
 
 io.on("connection", (socket) => {
   console.log(`User Connected: ${socket.id}`);
