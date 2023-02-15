@@ -34,7 +34,7 @@ const Messaging = ({ socket, room, username }) => {
   };
 
   async function deleteMessageById(id) {
-    await fetch(`http://localhost:5000/deleteMessage/${id}`, {
+    await fetch(`https://loving-jasper-fuchsia.glitch.me/deleteMessage/${id}`, {
       method: "DELETE",
     })
       .then((response) => response.json())
@@ -76,6 +76,9 @@ const Messaging = ({ socket, room, username }) => {
         "https://loving-jasper-fuchsia.glitch.me/messages",
         {
           method: "GET",
+          headers: {
+            "user-agent": "Mozilla",
+          },
         }
       );
       const data = await response.json();
@@ -125,7 +128,7 @@ const Messaging = ({ socket, room, username }) => {
                 onDoubleClick={() => {
                   if (username === messageContent.author) {
                     const confirmDelete = prompt(
-                      "Are you sure you want to delete this message? Type 'YES' to confirm."
+                      "Are you sure \n you want to delete this message? \n Type 'YES' to confirm."
                     );
                     if (confirmDelete === "YES") {
                       deleteMessageById(messageContent.id);
