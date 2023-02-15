@@ -33,6 +33,19 @@ const Messaging = ({ socket, room, username }) => {
     }
   };
 
+  async function deleteMessageById(id) {
+    await fetch(`http://localhost:5000/deleteMessage/${id}`, {
+      method: "DELETE",
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   useEffect(() => {
     // Send the username to the server
     socket.emit("connect_user", username);
@@ -58,8 +71,6 @@ const Messaging = ({ socket, room, username }) => {
   }, [isOnline]);
 
   useEffect(() => {
-    // localStorage.setItem("messages", JSON.stringify(messageList));
-
     async function getAllMessages() {
       const response = await fetch(
         "https://loving-jasper-fuchsia.glitch.me/messages",
@@ -74,20 +85,27 @@ const Messaging = ({ socket, room, username }) => {
           const author = index.author;
           const time = index.time;
           const room = index.room;
+          const id = index._id;
           const items = {
             message,
             author,
             time,
             room,
+            id,
           };
           return items;
         })
       );
-      console.log(dataItems);
       setMessageList(dataItems);
+      localStorage.setItem("messages", JSON.stringify(dataItems));
     }
     getAllMessages();
-  }, []);
+  }, [messageList]);
+
+  // useEffect(() => {
+  //   localStorage.setItem("messages", JSON.stringify(messageList));
+  // }, [messageList]);
+
   useEffect(() => {
     socket.off("receive_message");
     socket.on("receive_message", (data) => {
@@ -104,6 +122,19 @@ const Messaging = ({ socket, room, username }) => {
               <div
                 key={i}
                 id={username === messageContent.author ? "sender" : "receiver"}
+                onDoubleClick={() => {
+                  if (username === messageContent.author) {
+                    const confirmDelete = prompt(
+                      "Are you sure you want to delete this message? Type 'YES' to confirm."
+                    );
+                    if (confirmDelete === "YES") {
+                      deleteMessageById(messageContent.id);
+                    }
+                  }
+
+                  const userName = prompt("Please enter your name:");
+                  greetUser(userName);
+                }}
               >
                 <div className="message_content">{messageContent.message}</div>
                 <div className="message_content_meta">

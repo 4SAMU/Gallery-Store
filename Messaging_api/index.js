@@ -68,6 +68,22 @@ app.get("/messages", async (req, res) => {
   res.json(messages);
 });
 
+app.delete("/deleteMessage/:id", async (req, res) => {
+  const id = req.params.id;
+  Message.findByIdAndDelete(id, (err, deletedMessages) => {
+    if (err)
+      return res.status(500).json({ status: "error", message: err.message });
+    if (!deletedMessages)
+      return res
+        .status(404)
+        .json({ status: "error", message: "message not found" });
+
+    res
+      .status(200)
+      .json({ status: "ok", message: "message deleted successfully" });
+  });
+});
+
 server.listen(PORT, () => {
   console.log(`SERVER RUNNING ON PORT ${PORT}`);
 });
