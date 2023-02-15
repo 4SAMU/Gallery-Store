@@ -131,9 +131,6 @@ const Messaging = ({ socket, room, username }) => {
                       deleteMessageById(messageContent.id);
                     }
                   }
-
-                  const userName = prompt("Please enter your name:");
-                  greetUser(userName);
                 }}
               >
                 <div className="message_content">{messageContent.message}</div>
