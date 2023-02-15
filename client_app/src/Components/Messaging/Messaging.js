@@ -56,7 +56,7 @@ const Messaging = ({ socket, room, username }) => {
   }, [socket]);
 
   return (
-    <div>
+    <div className="msg">
       <div className="msg_container">
         <ScrollToBottom className="msg_room">
           {messageList.map((messageContent, i) => {

@@ -44,23 +44,27 @@
 }
 
 /*======================================*/
-
+.msg {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  /* background: red; */
+}
 .msg_container {
   position: absolute;
   width: 340px;
-  height: 550px;
+  height: 80vh;
   left: 50%;
-  top: 40%;
-  transform: translate(-50%, -50%);
+  top: 40px;
+  transform: translateX(-50%);
   border: 1px solid #716e6e;
-
   background: rgb(20, 20, 20);
 }
 
 .msg_room {
-  position: relative;
+  position: absolute;
   width: 340px;
-  height: 480px;
+  height: 72vh;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
@@ -152,7 +156,6 @@
 .time {
   position: absolute;
   right: 6px;
-  
 }
 
 .name {
