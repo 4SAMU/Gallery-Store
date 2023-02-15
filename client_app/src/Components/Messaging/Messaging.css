@@ -118,8 +118,10 @@
   height: fit-content;
   padding: 7px;
   border-radius: 10px 0 10px 10px;
-  right: 0;
+  /* right: 0; */
   margin-left: 120px;
+  overflow: auto;
+  /* overflow-y: hidden */
 }
 
 #receiver .message_content {
@@ -130,16 +132,32 @@
   padding: 7px;
   border-radius: 0 10px 10px 10px;
   left: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
-.message_content_meta {
-  position: inherit;
+#sender .message_content_meta {
+  position: relative;
   padding-left: 0;
-  bottom: -7px;
-  width: inherit;
+  bottom: 9px;
+  width: 200px;
+  height: 10px;
+    color: #fff;
+  font-size: xx-small;
+  margin-left: 120px;
+  /* z-index: 2px; */
+}
+
+#receiver .message_content_meta {
+  position: relative;
+  padding-left: 0;
+  bottom: 9px;
+  width: 200px;
   height: 10px;
   color: #fff;
   font-size: xx-small;
+  left: 4px;
+  /* z-index: 2px; */
 }
 
 .time {
@@ -168,10 +186,3 @@
   font-size: x-small;
   margin-top: 2px;
 }
-
-
-
-
-
-
-

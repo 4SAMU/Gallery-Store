@@ -6,8 +6,8 @@ import jwt from "jwt-decode";
 import Messaging from "./Messaging";
 
 const { io } = require("socket.io-client");
-// const socket = io.connect("https://loving-jasper-fuchsia.glitch.me", {
-const socket = io.connect("http://localhost:5000", {
+const socket = io.connect("https://loving-jasper-fuchsia.glitch.me", {
+// const socket = io.connect("http://localhost:5000", {
   transports: ["websocket", "polling"],
   extraHeaders: {
     "my-custom-header": "1234", // ignored

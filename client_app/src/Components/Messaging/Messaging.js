@@ -11,8 +11,7 @@ const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [isOnline, setIsOnline] = useState("online");
   const [messageList, setMessageList] = useState(
-    JSON.parse(localStorage.getItem("messages")) ||
-    []
+    JSON.parse(localStorage.getItem("messages")) || []
   );
 
   const sendMessage = async () => {
@@ -62,9 +61,12 @@ const Messaging = ({ socket, room, username }) => {
     // localStorage.setItem("messages", JSON.stringify(messageList));
 
     async function getAllMessages() {
-      const response = await fetch("http://localhost:5000/messages", {
-        method: "GET",
-      });
+      const response = await fetch(
+        "https://loving-jasper-fuchsia.glitch.me/messages",
+        {
+          method: "GET",
+        }
+      );
       const data = await response.json();
       const dataItems = await Promise.all(
         data.map(async (index) => {
@@ -103,13 +105,12 @@ const Messaging = ({ socket, room, username }) => {
                 key={i}
                 id={username === messageContent.author ? "sender" : "receiver"}
               >
-                <div className="message_content">
-                  {messageContent.message}
-                  <div className="message_content_meta">
-                    <p className="name">{messageContent.author}</p>
-                    <p className="time">{messageContent.time}</p>
-                  </div>
+                <div className="message_content">{messageContent.message}</div>
+                <div className="message_content_meta">
+                  <p className="name">{messageContent.author}</p>
+                  <p className="time">{messageContent.time}</p>
                 </div>
+
                 <br />
               </div>
             );
