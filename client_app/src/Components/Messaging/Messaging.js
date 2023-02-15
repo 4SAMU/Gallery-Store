@@ -9,6 +9,7 @@ import { toast } from "react-toastify";
 
 const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
+  const [isOnline, setIsOnline] = useState("online");
   const [messageList, setMessageList] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
@@ -40,10 +41,21 @@ const Messaging = ({ socket, room, username }) => {
     socket.off("connect_user");
     socket.on("user_connected", (user) => {
       if (user !== username) {
-        toast.info(`${user} is online`);
+        setIsOnline(`${user} is online`);
       }
     });
   }, [socket]);
+
+  useEffect(() => {
+    // simulate setting the user as online after 2 seconds
+    const timeoutId = setTimeout(() => {
+      setIsOnline("online");
+    }, 5000);
+
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isOnline]);
 
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messageList));
@@ -63,7 +75,7 @@ const Messaging = ({ socket, room, username }) => {
             return (
               <div
                 key={i}
-                id={username === messageContent.author ? "you" : "other"}
+                id={username === messageContent.author ? "sender" : "receiver"}
               >
                 <div className="message_content">
                   {messageContent.message}
@@ -92,6 +104,8 @@ const Messaging = ({ socket, room, username }) => {
           <MdSend />
         </button>
       </div>
+      {isOnline !== "online" ? <div className="isOnline">{isOnline}</div> : ""}
+
       <Navbar />
     </div>
   );

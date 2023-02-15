@@ -48,27 +48,27 @@
   position: absolute;
   width: 100vw;
   height: 100vh;
-  /* background: red; */
 }
 .msg_container {
   position: absolute;
   width: 340px;
-  height: 80vh;
+  height: 78vh;
   left: 50%;
-  top: 40px;
-  transform: translateX(-50%);
+  top: 30px;
+  transform: translate(-50%);
   border: 1px solid #716e6e;
+
   background: rgb(20, 20, 20);
 }
 
 .msg_room {
   position: absolute;
   width: 340px;
-  height: 72vh;
+  height: 68vh;
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  overflow-y: scroll;
+  /* overflow-y: scroll;*/
   overflow-x: hidden;
   color: white;
   display: grid;
@@ -82,10 +82,8 @@
   height: 50px;
   bottom: 0;
   left: 0;
-  /* background: red; */
   outline: 0;
   border: 0ch;
-  /* color: white; */
   padding-left: 15px;
   font-size: 18px;
 }
@@ -113,44 +111,35 @@
   color: #17bd56;
 }
 
-#you .message_content {
+#sender .message_content {
   position: relative;
   background: #3d5f61;
-  width: auto;
-  min-width: 50px;
-  max-width: 200px;
-  min-height: 50px;
+  width: 200px;
   max-height: max-content;
-  margin-left: 4px;
-  padding-left: 4px;
-  padding-top: 4px;
-  border-radius: 0 10px 10px 10px;
-  left: 38%;
+  padding: 7px;
+  border-radius: 10px 0 10px 10px;
+  right: 0;
+  margin-left: 120px;
 }
 
-#other .message_content {
+#receiver .message_content {
   position: relative;
   background: #585d5e;
-  width: 200px;
-  min-height: 50px;
+  max-width: 200px;
   max-height: max-content;
-  padding-left: 4px;
-  padding-top: 4px;
-  border-radius: 10px 0 10px 10px;
-  left: 0;
-  margin-left: 4px;
+  padding: 7px;
+  border-radius: 0 10px 10px 10px;
+  left: 4px;
 }
 
 .message_content_meta {
-  position: absolute;
+  position: inherit;
   padding-left: 0;
-  bottom: -2px;
-  width: 200px;
+  bottom: -7px;
+  width: inherit;
   height: 10px;
   color: #fff;
   font-size: xx-small;
-  /* display: flex; */
-  justify-content: space-between;
 }
 
 .time {
@@ -162,3 +151,27 @@
   position: absolute;
   left: 6px;
 }
+
+.isOnline {
+  position: relative;
+  border-radius: 10px;
+  color: #070606;
+  top: 10px;
+  /* color: black; */
+  background: #fff;
+  width: max-content;
+  height: auto;
+  text-align: center;
+  padding: 5px 10px 5px 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: x-small;
+  margin-top: 2px;
+}
+
+
+
+
+
+
+
