@@ -5,13 +5,14 @@ import "./Messaging.css";
 import { MdSend } from "@react-icons/all-files/md/MdSend";
 import Navbar from "../Navabar/Navbar";
 import ScrollToBottom from "react-scroll-to-bottom";
-import { toast } from "react-toastify";
+// import { toast } from "react-toastify";
 
 const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [isOnline, setIsOnline] = useState("online");
   const [messageList, setMessageList] = useState(
-    JSON.parse(localStorage.getItem("messages")) || []
+    JSON.parse(localStorage.getItem("messages")) ||
+    []
   );
 
   const sendMessage = async () => {
@@ -58,8 +59,33 @@ const Messaging = ({ socket, room, username }) => {
   }, [isOnline]);
 
   useEffect(() => {
-    localStorage.setItem("messages", JSON.stringify(messageList));
-  }, [messageList]);
+    // localStorage.setItem("messages", JSON.stringify(messageList));
+
+    async function getAllMessages() {
+      const response = await fetch("http://localhost:5000/messages", {
+        method: "GET",
+      });
+      const data = await response.json();
+      const dataItems = await Promise.all(
+        data.map(async (index) => {
+          const message = index.message;
+          const author = index.author;
+          const time = index.time;
+          const room = index.room;
+          const items = {
+            message,
+            author,
+            time,
+            room,
+          };
+          return items;
+        })
+      );
+      console.log(dataItems);
+      setMessageList(dataItems);
+    }
+    getAllMessages();
+  }, []);
   useEffect(() => {
     socket.off("receive_message");
     socket.on("receive_message", (data) => {
