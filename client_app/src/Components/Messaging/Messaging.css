@@ -68,8 +68,6 @@
   top: 0;
   left: 50%;
   transform: translateX(-50%);
-  /* overflow-y: scroll;*/
-  overflow-x: hidden;
   color: white;
   display: grid;
   grid-template-columns: repeat(1, 1fr);
@@ -142,10 +140,9 @@
   bottom: 9px;
   width: 200px;
   height: 10px;
-    color: #fff;
+  color: #fff;
   font-size: xx-small;
   margin-left: 120px;
-  /* z-index: 2px; */
 }
 
 #receiver .message_content_meta {
@@ -157,7 +154,6 @@
   color: #fff;
   font-size: xx-small;
   left: 4px;
-  /* z-index: 2px; */
 }
 
 .time {
