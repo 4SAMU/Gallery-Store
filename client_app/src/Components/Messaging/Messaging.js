@@ -16,7 +16,11 @@ const Messaging = ({ socket, room, username }) => {
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
+      const min = 1;
+      const max = 100;
+      const randomId = Math.floor(Math.random() * (max - min + 1) + min);
       const messageData = {
+        randomNumber: randomId,
         room: room,
         author: username,
         message: currentMessage,
@@ -33,10 +37,13 @@ const Messaging = ({ socket, room, username }) => {
     }
   };
 
-  async function deleteMessageById(id) {
-    await fetch(`https://loving-jasper-fuchsia.glitch.me/deleteMessage/${id}`, {
-      method: "DELETE",
-    })
+  async function deleteMessageByRID(randomId) {
+    await fetch(
+      `https://loving-jasper-fuchsia.glitch.me/deleteMessageByRID/${randomId}`,
+      {
+        method: "DELETE",
+      }
+    )
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
@@ -71,41 +78,6 @@ const Messaging = ({ socket, room, username }) => {
   }, [isOnline]);
 
   useEffect(() => {
-    async function getAllMessages() {
-      const response = await fetch(
-        "https://loving-jasper-fuchsia.glitch.me/messages",
-        {
-          method: "GET",
-          headers: {
-            "user-agent": "Mozilla",
-          },
-        }
-      );
-      const data = await response.json();
-      const dataItems = await Promise.all(
-        data.map(async (index) => {
-          const message = index.message;
-          const author = index.author;
-          const time = index.time;
-          const room = index.room;
-          const id = index._id;
-          const items = {
-            message,
-            author,
-            time,
-            room,
-            id,
-          };
-          return items;
-        })
-      );
-      setMessageList(dataItems);
-      // localStorage.setItem("messages", JSON.stringify(dataItems));
-    }
-    getAllMessages();
-  }, []);
-
-  useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messageList));
   }, [messageList]);
 
@@ -131,7 +103,7 @@ const Messaging = ({ socket, room, username }) => {
                       "Are you sure \n you want to delete this message? \n Type 'YES' to confirm."
                     );
                     if (confirmDelete === "YES") {
-                      deleteMessageById(messageContent.id);
+                      deleteMessageByRID(messageContent.randomNumber);
                     }
                   }
                 }}
