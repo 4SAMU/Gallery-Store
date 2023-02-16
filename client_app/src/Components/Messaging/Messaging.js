@@ -155,12 +155,12 @@ const Messaging = ({ socket, room, username }) => {
                   <p className="time">{messageContent.time}</p>
                 </div>
                 <br />
-                <div className="reply">
+                {/* <div className="reply">
                   <div className="message_content_reply">{replyText}</div>
                   {"hey"}
                 </div>
 
-                <br />
+                <br />*/}
               </div>
             );
           })}
