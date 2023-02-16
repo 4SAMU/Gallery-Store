@@ -10,6 +10,7 @@ import ScrollToBottom from "react-scroll-to-bottom";
 const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [isOnline, setIsOnline] = useState("online");
+  const [updateState, setUpdatedState] = useState(true);
   const [messageList, setMessageList] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
@@ -37,16 +38,29 @@ const Messaging = ({ socket, room, username }) => {
     }
   };
 
-  async function deleteMessageByRID(randomId) {
-    await fetch(
-      `https://loving-jasper-fuchsia.glitch.me/deleteMessageByRID/${randomId}`,
-      {
-        method: "DELETE",
+  async function deleteMessageByRID(randomId, index) {
+    try {
+      const response = await fetch(
+        `https://loving-jasper-fuchsia.glitch.me/deleteMessageByRID/${randomId}`,
+        {
+          method: "DELETE",
+        }
+      );
+      const data = await response.json();
+      if (data.status === "ok") {
+        handleDeleteMessage(index);
       }
-    )
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  async function fetchMessages() {
+    // Fetch messages from the server
+    fetch("https://loving-jasper-fuchsia.glitch.me/messages")
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
+        setMessageList(data);
       })
       .catch((error) => {
         console.error(error);
@@ -66,15 +80,15 @@ const Messaging = ({ socket, room, username }) => {
     });
 
     // Fetch messages from the server
-    fetch("https://loving-jasper-fuchsia.glitch.me/messages")
-      .then((response) => response.json())
-      .then((data) => {
-        setMessageList(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+    fetchMessages();
   }, [socket, username]);
+
+  useEffect(() => {
+    // if (updateState === false) {
+    //   console.log(updateState);
+    // }
+    fetchMessages();
+  }, [updateState]);
 
   useEffect(() => {
     // simulate setting the user as online after 2 seconds
@@ -89,7 +103,7 @@ const Messaging = ({ socket, room, username }) => {
 
   useEffect(() => {
     localStorage.setItem("messages", JSON.stringify(messageList));
-  }, [messageList]);
+  }, [messageList, updateState]);
 
   useEffect(() => {
     socket.off("receive_message");
@@ -97,6 +111,13 @@ const Messaging = ({ socket, room, username }) => {
       setMessageList((list) => [...list, data]);
     });
   }, [socket]);
+
+  const handleDeleteMessage = (messageIndex) => {
+    const updatedMessages = messageList.filter(
+      (_, index) => index !== messageIndex
+    );
+    setMessageList(updatedMessages);
+  };
 
   return (
     <div className="msg">
@@ -107,13 +128,14 @@ const Messaging = ({ socket, room, username }) => {
               <div
                 key={i}
                 id={username === messageContent.author ? "sender" : "receiver"}
+                // onClick={}
                 onDoubleClick={() => {
                   if (username === messageContent.author) {
                     const confirmDelete = prompt(
-                      "Are you sure \n you want to delete this message? \n Type 'YES' to confirm."
+                      "Are you sure you want to delete this message? Type 'YES' to confirm."
                     );
                     if (confirmDelete === "YES") {
-                      deleteMessageByRID(messageContent.randomId);
+                      deleteMessageByRID(messageContent.randomId, i);
                     }
                   }
                 }}
