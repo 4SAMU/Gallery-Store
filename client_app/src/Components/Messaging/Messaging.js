@@ -16,7 +16,6 @@ const Messaging = ({ socket, room, username }) => {
 
   const sendMessage = async () => {
     if (currentMessage !== "") {
-      await getAllMessages();
       const messageData = {
         room: room,
         author: username,
@@ -28,46 +27,11 @@ const Messaging = ({ socket, room, username }) => {
       };
 
       await socket.emit("send_message", messageData);
-      // setMessageList((list) => [...list, messageData]);
+      setMessageList((list) => [...list, messageData]);
+      // setMessageList(messageData);
       setCurrentMessage("");
     }
   };
-
-  async function getAllMessages() {
-    try {
-      const response = await fetch(
-        "https://loving-jasper-fuchsia.glitch.me/messages",
-        {
-          method: "GET",
-          headers: {
-            "user-agent": "Mozilla",
-          },
-        }
-      );
-      const data = await response.json();
-      const dataItems = await Promise.all(
-        data.map(async (index) => {
-          const message = index.message;
-          const author = index.author;
-          const time = index.time;
-          const room = index.room;
-          const id = index._id;
-          const items = {
-            message,
-            author,
-            time,
-            room,
-            id,
-          };
-          return items;
-        })
-      );
-      // setMessageList(dataItems);
-      localStorage.setItem("messages", JSON.stringify(dataItems));
-    } catch (error) {
-      console.log(error);
-    }
-  }
 
   async function deleteMessageById(id) {
     await fetch(`https://loving-jasper-fuchsia.glitch.me/deleteMessage/${id}`, {
@@ -106,14 +70,49 @@ const Messaging = ({ socket, room, username }) => {
     };
   }, [isOnline]);
 
-  // useEffect(() => {
-  //   localStorage.setItem("messages", JSON.stringify(messageList));
-  // }, [messageList]);
+  useEffect(() => {
+    async function getAllMessages() {
+      const response = await fetch(
+        "https://loving-jasper-fuchsia.glitch.me/messages",
+        {
+          method: "GET",
+          headers: {
+            "user-agent": "Mozilla",
+          },
+        }
+      );
+      const data = await response.json();
+      const dataItems = await Promise.all(
+        data.map(async (index) => {
+          const message = index.message;
+          const author = index.author;
+          const time = index.time;
+          const room = index.room;
+          const id = index._id;
+          const items = {
+            message,
+            author,
+            time,
+            room,
+            id,
+          };
+          return items;
+        })
+      );
+      setMessageList(dataItems);
+      // localStorage.setItem("messages", JSON.stringify(dataItems));
+    }
+    getAllMessages();
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("messages", JSON.stringify(messageList));
+  }, [messageList]);
 
   useEffect(() => {
     socket.off("receive_message");
-    socket.on("receive_message", (newMessage) => {
-      setMessageList((list) => [...list, newMessage]);
+    socket.on("receive_message", (data) => {
+      setMessageList((list) => [...list, data]);
     });
   }, [socket]);
 
