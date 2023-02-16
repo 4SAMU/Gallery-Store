@@ -53,18 +53,29 @@ const Messaging = ({ socket, room, username }) => {
       });
   }
 
-  useEffect(() => {
-    // Send the username to the server
-    socket.emit("connect_user", username);
+ useEffect(() => {
+   // Send the username to the server
+   socket.emit("connect_user", username);
 
-    // Listen for the user_connected event from the server
-    socket.off("connect_user");
-    socket.on("user_connected", (user) => {
-      if (user !== username) {
-        setIsOnline(`${user} is online`);
-      }
-    });
-  }, [socket]);
+   // Listen for the user_connected event from the server
+   socket.off("connect_user");
+   socket.on("user_connected", (user) => {
+     if (user !== username) {
+       setIsOnline(`${user} is online`);
+     }
+   });
+
+   // Fetch messages from the server
+   fetch("https://loving-jasper-fuchsia.glitch.me/messages")
+     .then((response) => response.json())
+     .then((data) => {
+       setMessageList(data);
+     })
+     .catch((error) => {
+       console.error(error);
+     });
+ }, [socket, username]);
+
 
   useEffect(() => {
     // simulate setting the user as online after 2 seconds
