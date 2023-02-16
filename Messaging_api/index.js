@@ -1,11 +1,11 @@
 /** @format */
+
 require("dotenv").config();
 const express = require("express");
 const app = express();
 const http = require("http");
 const cors = require("cors");
 const { Server } = require("socket.io");
-// const fs = require("fs");
 const mongoose = require("mongoose");
 
 const Message = require("./Models/messageSchema");
@@ -48,13 +48,16 @@ io.on("connection", (socket) => {
   });
 
   socket.on("send_message", async (data) => {
-    const message = new Message({
+    const messageData = new Message({
       message: data.message,
       author: data.author,
       room: data.room,
       time: data.time,
+      randomId: data.randomId,
     });
-    await message.save();
+
+    const newMessage = await messageData.save();
+    console.log(newMessage);
     socket.to(data.room).emit("receive_message", data);
   });
 
@@ -74,6 +77,22 @@ app.delete("/deleteMessage/:id", async (req, res) => {
     if (err)
       return res.status(500).json({ status: "error", message: err.message });
     if (!deletedMessages)
+      return res
+        .status(404)
+        .json({ status: "error", message: "message not found" });
+
+    res
+      .status(200)
+      .json({ status: "ok", message: "message deleted successfully" });
+  });
+});
+
+app.delete("/deleteMessageByRID/:randomId", async (req, res) => {
+  const randomId = req.params.randomId;
+  Message.findOneAndDelete({ randomId }, (err, deletedMessage) => {
+    if (err)
+      return res.status(500).json({ status: "error", message: err.message });
+    if (!deletedMessage)
       return res
         .status(404)
         .json({ status: "error", message: "message not found" });

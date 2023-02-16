@@ -20,7 +20,7 @@ const Messaging = ({ socket, room, username }) => {
       const max = 100;
       const randomId = Math.floor(Math.random() * (max - min + 1) + min);
       const messageData = {
-        randomNumber: randomId,
+        randomId: randomId,
         room: room,
         author: username,
         message: currentMessage,
@@ -53,29 +53,28 @@ const Messaging = ({ socket, room, username }) => {
       });
   }
 
- useEffect(() => {
-   // Send the username to the server
-   socket.emit("connect_user", username);
+  useEffect(() => {
+    // Send the username to the server
+    socket.emit("connect_user", username);
 
-   // Listen for the user_connected event from the server
-   socket.off("connect_user");
-   socket.on("user_connected", (user) => {
-     if (user !== username) {
-       setIsOnline(`${user} is online`);
-     }
-   });
+    // Listen for the user_connected event from the server
+    socket.off("connect_user");
+    socket.on("user_connected", (user) => {
+      if (user !== username) {
+        setIsOnline(`${user} is online`);
+      }
+    });
 
-   // Fetch messages from the server
-   fetch("https://loving-jasper-fuchsia.glitch.me/messages")
-     .then((response) => response.json())
-     .then((data) => {
-       setMessageList(data);
-     })
-     .catch((error) => {
-       console.error(error);
-     });
- }, [socket, username]);
-
+    // Fetch messages from the server
+    fetch("https://loving-jasper-fuchsia.glitch.me/messages")
+      .then((response) => response.json())
+      .then((data) => {
+        setMessageList(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, [socket, username]);
 
   useEffect(() => {
     // simulate setting the user as online after 2 seconds
@@ -114,7 +113,7 @@ const Messaging = ({ socket, room, username }) => {
                       "Are you sure \n you want to delete this message? \n Type 'YES' to confirm."
                     );
                     if (confirmDelete === "YES") {
-                      deleteMessageByRID(messageContent.randomNumber);
+                      deleteMessageByRID(messageContent.randomId);
                     }
                   }
                 }}
@@ -132,7 +131,7 @@ const Messaging = ({ socket, room, username }) => {
         </ScrollToBottom>
         <input
           className="msg_input"
-          placeholder="hey..."
+          placeholder="Message..."
           value={currentMessage}
           onChange={(event) => {
             setCurrentMessage(event.target.value);

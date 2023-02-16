@@ -7,6 +7,7 @@ const messageSchema = new mongoose.Schema({
   author: String,
   room: String,
   time: String,
+  randomId: Number,
 });
 
 const Message = mongoose.model("Message", messageSchema);
