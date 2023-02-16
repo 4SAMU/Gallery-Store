@@ -11,6 +11,7 @@ const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [isOnline, setIsOnline] = useState("online");
   const [updateState, setUpdatedState] = useState(true);
+  const [replyText, setReplyText] = useState("");
   const [messageList, setMessageList] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
@@ -119,6 +120,12 @@ const Messaging = ({ socket, room, username }) => {
     setMessageList(updatedMessages);
   };
 
+  const replyToMessage = (messageIndex) => {
+    const selectedMessage = messageList[messageIndex];
+    setReplyText(selectedMessage.message);
+    console.log(selectedMessage.message);
+  };
+
   return (
     <div className="msg">
       <div className="msg_container">
@@ -128,7 +135,9 @@ const Messaging = ({ socket, room, username }) => {
               <div
                 key={i}
                 id={username === messageContent.author ? "sender" : "receiver"}
-                // onClick={}
+                onClick={() => {
+                  replyToMessage(i);
+                }}
                 onDoubleClick={() => {
                   if (username === messageContent.author) {
                     const confirmDelete = prompt(
@@ -144,6 +153,11 @@ const Messaging = ({ socket, room, username }) => {
                 <div className="message_content_meta">
                   <p className="name">{messageContent.author}</p>
                   <p className="time">{messageContent.time}</p>
+                </div>
+                <br />
+                <div className="reply">
+                  <div className="message_content_reply">{replyText}</div>
+                  {"hey"}
                 </div>
 
                 <br />

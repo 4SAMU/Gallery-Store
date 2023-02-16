@@ -122,6 +122,36 @@
   /* overflow-y: hidden */
 }
 
+#sender .message_content_reply {
+  position: relative;
+  background: #244647;
+  /* width: 100px; */
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  /* right: 0; */
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: auto;
+  color: #828f92;
+  /* overflow-y: hidden */
+}
+
+#receiver .message_content_reply {
+  position: relative;
+  background: #8e9292;
+  /* width: 100px; */
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px;
+  /* right: 0; */
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: auto;
+  color: #000405;
+  /* overflow-y: hidden */
+}
+
 #receiver .message_content {
   position: relative;
   background: #585d5e;
@@ -154,6 +184,29 @@
   color: #fff;
   font-size: xx-small;
   left: 4px;
+}
+
+#sender .reply {
+  position: relative;
+  background: #3d5f61;
+  width: 200px;
+  height: fit-content;
+  padding: 10px;
+  border-radius: 10px 0 10px 10px;
+  margin-left: 115px;
+  overflow: auto;
+}
+
+#receiver .reply {
+  position: relative;
+  background: #585d5e;
+  width: 200px;
+  height: fit-content;
+   padding: 10px;
+  border-radius: 0 10px 10px 10px;
+  margin-left: 4px;
+  overflow: auto;
+  color: #d1e5e9;
 }
 
 .time {
