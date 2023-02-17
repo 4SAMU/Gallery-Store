@@ -12,7 +12,7 @@ const Messaging = ({ socket, room, username }) => {
   const [currentMessage, setCurrentMessage] = useState("");
   const [isOnline, setIsOnline] = useState("online");
   const [updateState, setUpdatedState] = useState(true);
-  const [replyText, setReplyText] = useState("");
+  // const [replyText, setReplyText] = useState("");
   const [messageList, setMessageList] = useState(
     JSON.parse(localStorage.getItem("messages")) || []
   );
@@ -122,11 +122,11 @@ const Messaging = ({ socket, room, username }) => {
     setMessageList(updatedMessages);
   };
 
-  const replyToMessage = (messageIndex) => {
-    const selectedMessage = messageList[messageIndex];
-    setReplyText(selectedMessage);
-    console.log(selectedMessage.message);
-  };
+  // const replyToMessage = (messageIndex) => {
+  //   const selectedMessage = messageList[messageIndex];
+  //   setReplyText(selectedMessage);
+  //   console.log(selectedMessage.message);
+  // };
 
   return (
     <div className="msg">
