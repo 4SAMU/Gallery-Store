@@ -117,14 +117,34 @@ const Messaging = ({ socket, room, username }) => {
     const updatedMessages = messageList.filter(
       (_, index) => index !== messageIndex
     );
+    setUpdatedState(false);
     setMessageList(updatedMessages);
   };
 
   const replyToMessage = (messageIndex) => {
     const selectedMessage = messageList[messageIndex];
-    setReplyText(selectedMessage.message);
+    setReplyText(selectedMessage);
     console.log(selectedMessage.message);
   };
+
+  function isUrl(text) {
+    const urlRegex = /(https?:\/\/[^\s]+)/g;
+    // Split the text into two parts: before and after the link
+    const parts = text.split(urlRegex);
+    return parts.map((part, i) => {
+      if (urlRegex.test(part)) {
+        // If the current part is a URL, wrap it in an anchor tag
+        return (
+          <a key={i} href={part}>
+            {part}
+          </a>
+        );
+      } else {
+        // Otherwise, return the text unchanged
+        return <span key={i}>{part}</span>;
+      }
+    });
+  }
 
   return (
     <div className="msg">
@@ -149,18 +169,34 @@ const Messaging = ({ socket, room, username }) => {
                   }
                 }}
               >
-                <div className="message_content">{messageContent.message}</div>
-                <div className="message_content_meta">
-                  <p className="name">{messageContent.author}</p>
-                  <p className="time">{messageContent.time}</p>
-                </div>
+                {isUrl(messageContent.message) ? (
+                  <>
+                    <div className="message_content">
+                      {isUrl(messageContent.message)}
+                    </div>
+                    <div className="message_content_meta">
+                      <p className="name">{messageContent.author}</p>
+                      <p className="time">{messageContent.time}</p>
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div className="message_content">
+                      {messageContent.message}
+                    </div>
+                    <div className="message_content_meta">
+                      <p className="name">{messageContent.author}</p>
+                      <p className="time">{messageContent.time}</p>
+                    </div>
+                  </>
+                )}
                 <br />
                 {/* <div className="reply">
-                  <div className="message_content_reply">{replyText}</div>
+                  <div className="message_content_reply" id="sender">
+                    {replyText.message}
+                  </div>
                   {"hey"}
-                </div>
-
-                <br />*/}
+                </div>*/}
               </div>
             );
           })}
