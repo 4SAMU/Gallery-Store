@@ -170,7 +170,7 @@ const Messaging = ({ socket, room, username }) => {
                 }}
               >
                 {isUrl(messageContent.message) ? (
-                  <>
+                  <div>
                     <div className="message_content">
                       {isUrl(messageContent.message)}
                     </div>
@@ -178,9 +178,9 @@ const Messaging = ({ socket, room, username }) => {
                       <p className="name">{messageContent.author}</p>
                       <p className="time">{messageContent.time}</p>
                     </div>
-                  </>
+                  </div>
                 ) : (
-                  <>
+                  <div>
                     <div className="message_content">
                       {messageContent.message}
                     </div>
@@ -188,7 +188,7 @@ const Messaging = ({ socket, room, username }) => {
                       <p className="name">{messageContent.author}</p>
                       <p className="time">{messageContent.time}</p>
                     </div>
-                  </>
+                  </div>
                 )}
                 <br />
                 {/* <div className="reply">
