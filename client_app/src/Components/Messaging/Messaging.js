@@ -5,7 +5,7 @@ import "./Messaging.css";
 import { MdSend } from "@react-icons/all-files/md/MdSend";
 import Navbar from "../Navabar/Navbar";
 import ScrollToBottom from "react-scroll-to-bottom";
-import makeClickable from "make-clickable";
+import makeClickable from "../../utils/MakeClickable";
 // import { toast } from "react-toastify";
 
 const Messaging = ({ socket, room, username }) => {
