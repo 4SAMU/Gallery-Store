@@ -137,9 +137,9 @@ const Messaging = ({ socket, room, username }) => {
               <div
                 key={i}
                 id={username === messageContent.author ? "sender" : "receiver"}
-                onClick={() => {
-                  replyToMessage(i);
-                }}
+                // onClick={() => {
+                //   replyToMessage(i);
+                // }}
                 onDoubleClick={() => {
                   if (username === messageContent.author) {
                     const confirmDelete = prompt(
