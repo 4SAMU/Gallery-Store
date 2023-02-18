@@ -17,7 +17,20 @@ export default function makeTextClickable(text) {
   return parts.map((part, i) => {
     if (urlRegex.test(part)) {
       if (videoRegex.test(part)) {
-        return <ReactPlayer key={i} url={part} width={200} height={200} controls />;
+        // Add the "http://" or "https://" prefix back to the URL if it's not already there
+        const url = /^https?:\/\//i.test(part) ? part : `http://${part}`;
+
+        // Extract the website's root URL
+        const rootUrl = url.match(/^(https?:\/\/[^/]+)/i)[1];
+        return (
+          <>
+            <a key={i} href={url} target="_blank" rel="noopener noreferrer">
+              <img src={`${rootUrl}/favicon.ico`} alt="" />
+              {part}
+            </a>
+            <ReactPlayer key={i} url={part} width={200} height={200} controls />
+          </>
+        );
       } else {
         // Add the "http://" or "https://" prefix back to the URL if it's not already there
         const url = /^https?:\/\//i.test(part) ? part : `http://${part}`;
