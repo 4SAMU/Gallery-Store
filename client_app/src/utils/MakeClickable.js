@@ -12,8 +12,14 @@ export default function makeTextClickable(text) {
 
   return parts.map((part, i) => {
     if (urlRegex.test(part)) {
+      // Add the "http://" or "https://" prefix back to the URL if it's not already there
+      const url = /^https?:\/\//i.test(part) ? part : `http://${part}`;
+
+      // Extract the website's root URL
+      const rootUrl = url.match(/^(https?:\/\/[^/]+)/i)[1];
       return (
-        <a key={i} href={part} target="_blank" rel="noopener noreferrer">
+        <a key={i} href={url} target="_blank" rel="noopener noreferrer">
+          <img src={`${rootUrl}/favicon.ico`} alt="" />
           {part}
         </a>
       );
