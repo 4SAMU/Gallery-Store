@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 export default function makeTextClickable(text) {
   const urlRegex = /(https?:\/\/[^\s]+)/g;
   const videoRegex =
-    /(https?:\/\/.*(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com|twitch\.tv|facebook\.com))/i;
+    /(https?:\/\/.*(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com|twitch\.tv|tiktok\.com))/i;
   const phoneRegex =
     /(\+?\d{1,3}[-.\s]?)?\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/ ||
     /^[+]*[(]{0,1}[0-9]{1,3}[)]{0,1}[-\s\./0-9]*$/g; // Match phone numbers with an optional country code and with spaces, dashes, or dots between digits
