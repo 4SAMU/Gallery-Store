@@ -77,8 +77,8 @@
 .msg_input {
   position: absolute;
   width: 290px;
-  height: 50px;
-  bottom: 0;
+  height: 48px;
+  bottom: -1px;
   left: 0;
   outline: 0;
   border: 0ch;

@@ -183,7 +183,7 @@ const Messaging = ({ socket, room, username }) => {
             );
           })}
         </ScrollToBottom>
-        <input
+        <textarea
           className="msg_input"
           placeholder="Message..."
           value={currentMessage}
@@ -191,9 +191,15 @@ const Messaging = ({ socket, room, username }) => {
             setCurrentMessage(event.target.value);
           }}
           onKeyPress={(event) => {
-            event.key === "Enter" && sendMessage();
+            if (event.shiftKey && event.key === "Enter") {
+              setCurrentMessage(currentMessage + "\n");
+            } else if (event.key === "Enter") {
+              sendMessage();
+              setCurrentMessage("");
+            }
           }}
         />
+
         <button className="sendBtn" onClick={sendMessage}>
           <MdSend />
         </button>
