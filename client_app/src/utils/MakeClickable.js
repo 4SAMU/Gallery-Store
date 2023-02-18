@@ -9,7 +9,7 @@ export default function makeTextClickable(text) {
   const videoRegex = /\.(mp4|avi|mov|wmv|flv|mkv|webm)$/i;
 
   const socialMediaRegex =
-    /(https?:\/\/.*(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com|twitch\.tv|facebook\.com|fb\.watch|bbc\.com))/i;
+    /(https?:\/\/.*(youtube\.com|youtu\.be|vimeo\.com|dailymotion\.com|twitch\.tv|facebook\.com|fb\.watch))/i;
 
   const phoneRegex = /(\+?\d{1,3}[-.\s]?)?\d{3}[-.\s]?\d{3}[-.\s]?\d{4}/; // Match phone numbers with an optional country code and with spaces, dashes, or dots between digits
   const emailRegex = /\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}\b/i;
@@ -45,6 +45,22 @@ export default function makeTextClickable(text) {
               <img src={`${rootUrl}/favicon.ico`} alt="" width={20} />
               {part}
               <img src={part} alt="" width={200} height={300}></img>
+            </a>
+          </div>
+        );
+      } else if (videoRegex.test(part)) {
+        const url = /^https?:\/\//i.test(part) ? part : `http://${part}`;
+
+        // Extract the website's root URL
+        const rootUrl = url.match(/^(https?:\/\/[^/]+)/i)[1];
+        return (
+          <div key={i}>
+            <a href={url} target="_blank" rel="noopener noreferrer">
+              <img src={`${rootUrl}/favicon.ico`} alt="" width={20} />
+              {part}
+              <video width={200} height={200} controls>
+                <source src={url} type="video/mp4" />
+              </video>
             </a>
           </div>
         );
