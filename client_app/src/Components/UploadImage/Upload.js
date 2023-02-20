@@ -6,6 +6,7 @@ import "./Upload.css";
 import "../ProfileUpdate/Profile.css";
 import TransclucentBg from "../LoaderTransclucentBg/TransclucentBg";
 import { toast } from "react-toastify";
+import imageToJpeg from "../../utils/ConvertToJpeg";
 
 const Upload = () => {
   const [selectedFile, setSelectedFile] = useState();
@@ -16,9 +17,19 @@ const Upload = () => {
   });
 
   const [fileImage, setFile] = useState();
+
   function inputFileHandler(e) {
-    setSelectedFile(e.target.files[0]);
-    setFile(URL.createObjectURL(e.target.files[0]));
+    let file = e.target.files[0];
+    console.log("original image", file);
+
+    imageToJpeg(file).then((jpegBlob) => {
+      const jpegFile = new File([jpegBlob], `${file.name}.jpeg`, {
+        type: "image/jpeg",
+      });
+      console.log(jpegFile);
+      setSelectedFile(jpegFile);
+      setFile(URL.createObjectURL(jpegFile));
+    });
   }
 
   async function uploadImage() {
@@ -40,8 +51,10 @@ const Upload = () => {
         );
 
         const data = await response.json();
+        console.log(data);
         return data.fileUrl;
       } catch (error) {
+        alert(error);
         setIsModalOpen(false);
       }
     }
