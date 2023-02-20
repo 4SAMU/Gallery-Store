@@ -72,7 +72,7 @@ export default function makeTextClickable(text) {
         const rootUrl = url.match(/^(https?:\/\/[^/]+)/i)[1];
         return (
           <a key={i} href={url} target="_blank" rel="noopener noreferrer">
-            <img src={`${rootUrl}/favicon.ico`} alt="" />
+            <img src={`${rootUrl}/favicon.ico`} alt="" width={20} />
             {part}
           </a>
         );
@@ -86,7 +86,7 @@ export default function makeTextClickable(text) {
       return (
         <div key={i}>
           <a href={url} target="_blank" rel="noopener noreferrer">
-            <img src={`${rootUrl}/favicon.ico`} alt="" />
+            <img src={`${rootUrl}/favicon.ico`} alt="" width={20} />
             {part}
           </a>
           <img src={part} alt="" width={200} height={200} />
