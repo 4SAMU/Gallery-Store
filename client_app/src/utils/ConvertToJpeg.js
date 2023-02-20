@@ -28,7 +28,7 @@ export default function convertToJPEG(file) {
             resolve(newFile);
           },
           "image/jpeg",
-          1
+          0.8 // set quality to 0.8
         );
       };
       img.onerror = (error) => {

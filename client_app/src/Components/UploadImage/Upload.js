@@ -43,7 +43,9 @@ const Upload = () => {
         setIsModalOpen(true);
 
         const response = await fetch(
-          "https://gallery-store-api.vercel.app/UploadImage",
+          // "https://gallery-store-api.vercel.app/UploadImage",
+          "http://localhost:4000/UploadImage",
+
           {
             method: "POST",
             body: formData,
@@ -70,19 +72,16 @@ const Upload = () => {
         setBusy(true);
         setIsModalOpen(true);
 
-        const response = await fetch(
-          "https://gallery-store-api.vercel.app/UploadData",
-          {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({
-              imageUrl,
-              caption,
-            }),
-          }
-        );
+        const response = await fetch("http://localhost:4000/UploadData", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            imageUrl,
+            caption,
+          }),
+        });
 
         const data = await response.json();
 
@@ -117,6 +116,7 @@ const Upload = () => {
           <div className="UpdateImage_imageArea">
             <div className="image_icon">
               <input
+                accept="image/*"
                 type={"file"}
                 className="file-input"
                 onChange={inputFileHandler}
