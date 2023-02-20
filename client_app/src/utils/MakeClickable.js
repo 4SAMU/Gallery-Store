@@ -28,7 +28,7 @@ export default function makeTextClickable(text) {
         return (
           <div key={i}>
             <a href={url} target="_blank" rel="noopener noreferrer">
-              <img src={`${rootUrl}/favicon.ico`} alt="" />
+              <img src={`${rootUrl}/favicon.ico`} alt="" width={20} />
               {part}
             </a>
             <ReactPlayer url={part} width={200} height={"auto"} controls />
