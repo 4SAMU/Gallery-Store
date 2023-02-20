@@ -15,7 +15,6 @@ const Profile = () => {
   const token = localStorage.getItem("token");
   const userd = jwt(token);
 
-
   const [formParams, updateFormParams] = useState({
     name: userd.name,
     email: userd.email,
@@ -109,6 +108,12 @@ const Profile = () => {
           setIsModalOpen(false);
           setBusy(false);
           toast.error(data.error);
+          if (data.error === "user not found") {
+            setTimeout(function () {
+              // code to be executed after 3 seconds
+              window.location.href = "/login";
+            }, 2000);
+          }
         }
       } catch (error) {
         setIsModalOpen(false);
