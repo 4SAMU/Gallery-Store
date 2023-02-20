@@ -140,6 +140,7 @@ const Profile = () => {
             />
             <div className="image_icon">
               <input
+                accept="image/*"
                 type={"file"}
                 className="file-input"
                 onChange={inputFileHandler}
