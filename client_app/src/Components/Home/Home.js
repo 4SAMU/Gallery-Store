@@ -19,11 +19,13 @@ const Home = () => {
   const [selectedImageId, setSelectedImageId] = useState(null);
   const [selectedCaptionId, setSelectedCaptionId] = useState(null);
   const [loading, setLoading] = useState(false);
+  const [dataFetched, setDataFetched] = useState(false);
 
   const token = localStorage.getItem("token");
   const userd = jwt(token);
 
   async function getFiles() {
+    setDataFetched(false);
     const response = await fetch(
       "https://gallery-store-api.vercel.app/getFiles"
     );
@@ -46,6 +48,7 @@ const Home = () => {
       })
     );
     setUploadData(dataItems.reverse());
+    setDataFetched(true);
   }
 
   const handleDownload = async (url, imageId) => {
@@ -67,7 +70,7 @@ const Home = () => {
 
   useEffect(() => {
     getFiles();
-  }, [uploadData]);
+  }, [dataFetched]);
 
   return (
     <div className="Page">
