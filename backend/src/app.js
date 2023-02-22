@@ -3,6 +3,7 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const app = express();
+const path = require("path");
 
 const { PORT } = process.env;
 
@@ -41,8 +42,8 @@ app.use("/deleteAvatar", deleteAvatar);
 
 //starting endpoint showing the html file
 app.get("/", (req, res) => {
-  // res.sendFile("index.html", { root: __dirname });
-  res.json({ success: true });
+  const filePath = path.join(__dirname, "index.html");
+  res.sendFile(filePath);
 });
 
 //Server listening to routes
