@@ -1,0 +1,44 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Gallery store</title>
+  </head>
+
+  <body style="background-color: rgb(7, 6, 6); color: aliceblue;">
+    <h1 >Gallery Store Api</h1>
+    <p >
+      This is a Node.js Express server application that provides authentication
+      and image upload functionality.<br />The script first imports required
+      dependencies:
+      <ul >
+        <li>`dotenv` is used to load environment variables from a .env file.</li>
+        <li>`express` is used to build the server and handle HTTP requests.</li>
+        <li>`cors` is used to handle cross-origin resource sharing (CORS) requests.</li>
+        <li> `mongoose` is used to connect to and perform operations on a MongoDB database.</li>
+        <li>`jwt` is used to handle JSON Web Tokens (JWT) for authentication.</li>
+        <li> `bcryptjs` is used to hash and compare passwords securely.</li>
+        <li> `multer` is used to handle file uploads.</li>
+      </ul>
+      Then it defines an Express application, app, and sets up middlewares for handling incoming requests, such as JSON parsing and handling CORS. The script then connects to a MongoDB database using the MONGODB_URL environment variable.<br/>
+
+      The application provides several endpoints for authentication and image upload functionality:
+<ul>
+  <li>A `/register` endpoint to handle user registration and store user data in the MongoDB database.</li>
+  <li>A `/login` endpoint to handle user login and generate a JWT to be sent back to the client.</li>
+  <li> A `/update` endpoint to handle updating user information in the MongoDB database.</li>
+  <li>A `/avatar` endpoint to handle uploading an avatar image and storing it in the MongoDB database.</li>
+</ul>    
+
+The script makes use of MongoDB models to interact with the database, including `User`, `avatarImage`, `imageUpload`, and `imageCaption`. These models define the schema for the documents to be stored in the database.<br/>
+In the file upload endpoint, a `multer middleware` is used to handle file uploads. The uploaded file is then stored as a new document in the MongoDB database using the `avatarImage` model.
+    </p>
+    <br/>
+    <br/>
+    <footer>@C 2023 <br/> Author: Samuel Nzomo<br/> <a style="text-decoration: none; color: cadetblue;" href="https://twitter.com/sam_nzomo" target="_blank" rel="nonrer">@sam_nzomo</a></footer>
+  </body>
+</html>
