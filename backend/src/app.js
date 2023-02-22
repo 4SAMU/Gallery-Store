@@ -41,7 +41,8 @@ app.use("/deleteAvatar", deleteAvatar);
 
 //starting endpoint showing the html file
 app.get("/", (req, res) => {
-  res.sendFile("index.html", { root: __dirname });
+  // res.sendFile("index.html", { root: __dirname });
+  res.json({ success: true });
 });
 
 //Server listening to routes
