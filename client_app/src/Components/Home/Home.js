@@ -78,7 +78,7 @@ const Home = () => {
   async function getLikesById(postId) {
     let email = userd.email;
     const response = await fetch(
-      `http://localhost:4000/likes/getLikesById?postId=${postId}&email=${email}`,
+      `https://gallery-store-api.vercel.app/likes/getLikesById?postId=${postId}&email=${email}`,
       {
         method: "GET",
       }
@@ -89,7 +89,7 @@ const Home = () => {
 
   //handle likes
   async function handleLikes(postId) {
-    const response = await fetch("http://localhost:4000/likes", {
+    const response = await fetch("https://gallery-store-api.vercel.app/likes", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

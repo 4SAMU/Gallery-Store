@@ -14,7 +14,6 @@ const Profile = () => {
 
   const token = localStorage.getItem("token");
   const userd = jwt(token);
-  console.log(userd);
 
   const [formParams, updateFormParams] = useState({
     name: userd.name,
@@ -33,7 +32,6 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("file", file);
     if (!file) {
-      // toast.warn("select an image to continue");
       return;
     }
 
