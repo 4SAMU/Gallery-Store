@@ -14,6 +14,7 @@ const Profile = () => {
 
   const token = localStorage.getItem("token");
   const userd = jwt(token);
+  console.log(userd);
 
   const [formParams, updateFormParams] = useState({
     name: userd.name,
@@ -32,94 +33,86 @@ const Profile = () => {
     const formData = new FormData();
     formData.append("file", file);
     if (!file) {
-      toast.warn("select an image to continue");
-    } else {
-      try {
-        setBusy(true);
-        setIsModalOpen(true);
-        const response = await fetch(
-          "https://gallery-store-api.vercel.app/avatar",
-          {
-            method: "POST",
-            body: formData,
-          }
-        );
+      // toast.warn("select an image to continue");
+      return;
+    }
 
-        const data = await response.json();
-
-        if (data.status === "error") {
-          setBusy(false);
-          setIsModalOpen(false);
-          toast.warn(data.error);
+    try {
+      setBusy(true);
+      setIsModalOpen(true);
+      const response = await fetch(
+        "https://gallery-store-api.vercel.app/avatar",
+        {
+          method: "POST",
+          body: formData,
         }
-        return data.fileUrl;
-      } catch (error) {
-        setIsModalOpen(false);
+      );
+
+      const data = await response.json();
+
+      if (data.status === "error") {
         setBusy(false);
-        toast.warn(error);
+        setIsModalOpen(false);
+        toast.warn(data.error);
       }
+      return data.fileUrl;
+    } catch (error) {
+      setIsModalOpen(false);
+      setBusy(false);
+      toast.warn(error);
     }
   }
 
   async function updateUserData() {
     const { name, email, password } = formParams;
-    const token = localStorage.getItem("token");
-
     const avatarUrl = await userAvatar();
-
-    if (!avatarUrl) {
-      // toast.warn("all fields must be filled");
-      setBusy(false);
-      setIsModalOpen(false);
-    } else {
-      try {
-        setBusy(true);
-        setIsModalOpen(true);
-        const response = await fetch(
-          "https://gallery-store-api.vercel.app/update",
-          {
-            method: "PUT",
-            headers: {
-              "content-type": "application/json",
-            },
-            body: JSON.stringify({
-              name,
-              email,
-              password,
-              avatarUrl,
-              token,
-            }),
-          }
-        );
-
-        const data = await response.json();
-
-        if (data.status === "ok") {
-          localStorage.setItem("token", data.user);
-          toast.success("Profile updated");
-
-          setTimeout(function () {
-            // code to be executed after 3 seconds
-            window.location.href = "/Home";
-          }, 3000);
-
-          // alert("status ok");
-        } else if (data.status === "error") {
-          setIsModalOpen(false);
-          setBusy(false);
-          toast.error(data.error);
-          if (data.error === "user not found") {
-            setTimeout(function () {
-              // code to be executed after 3 seconds
-              window.location.href = "/login";
-            }, 2000);
-          }
+    try {
+      setBusy(true);
+      setIsModalOpen(true);
+      const response = await fetch(
+        "https://gallery-store-api.vercel.app/update",
+        {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            password,
+            avatarUrl: avatarUrl ? avatarUrl : userd.avatar,
+            token,
+          }),
         }
-      } catch (error) {
+      );
+
+      const data = await response.json();
+
+      if (data.status === "ok") {
+        localStorage.setItem("token", data.user);
+        toast.success("Profile updated");
+
+        setTimeout(function () {
+          // code to be executed after 3 seconds
+          window.location.href = "/Home";
+        }, 3000);
+
+        // alert("status ok");
+      } else if (data.status === "error") {
         setIsModalOpen(false);
         setBusy(false);
         toast.error(data.error);
+        if (data.error === "user not found") {
+          setTimeout(function () {
+            // code to be executed after 3 seconds
+            window.location.href = "/login";
+          }, 2000);
+        }
       }
+    } catch (error) {
+      setIsModalOpen(false);
+      setBusy(false);
+      toast.error(data.error);
     }
   }
 

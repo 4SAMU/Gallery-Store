@@ -6,6 +6,7 @@ import samu from "../../assets/samu.jpeg";
 import Navbar from "../Navabar/Navbar";
 
 import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
+import { FiHeart } from "@react-icons/all-files/fi/FiHeart";
 import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
 import Modal from "../ModalPopup/Modal";
 import jwt from "jwt-decode";
@@ -88,8 +89,6 @@ const Home = () => {
 
   //handle likes
   async function handleLikes(postId) {
-    // let email = userd.email;
-    // let post=
     const response = await fetch("http://localhost:4000/likes", {
       method: "POST",
       headers: {
@@ -102,8 +101,9 @@ const Home = () => {
     });
     const data = await response.json();
     console.log(data);
-    if ((data.error = "already liked")) {
-      //
+    if (data.status = "like now") {
+      setDataFetched(true);
+      getFiles();
     }
   }
 
@@ -191,23 +191,44 @@ const Home = () => {
                     </div>
                   )}
                   {uploadItems.status === "already liked" ? (
-                    <FaHeart
-                      className="likeBtn"
-                      style={{ color: "green" }}
-                      onClick={() => {
-                        handleLikes(uploadItems.captionId);
-                      }}
-                    />
+                    <button className="likeBtn">
+                      <span
+                        style={{
+                          color: "white",
+                          fontSize: "10px",
+                          left: "-30px",
+                        }}
+                      >
+                        {" "}
+                        {uploadItems.likes}
+                      </span>
+                      <FaHeart
+                        style={{ color: "green", fontSize: "23px" }}
+                        onClick={() => {
+                          handleLikes(uploadItems.captionId);
+                        }}
+                      />
+                    </button>
                   ) : (
-                    <FaHeart
-                      className="likeBtn"
-                      onClick={() => {
-                        handleLikes(uploadItems.captionId);
-                      }}
-                    />
+                    <button className="likeBtn">
+                      <span
+                        style={{
+                          color: "white",
+                          fontSize: "10px",
+                          left: "-30px",
+                        }}
+                      >
+                        {" "}
+                        {uploadItems.likes}
+                      </span>
+                      <FiHeart
+                        style={{ color: "green", fontSize: "23px" }}
+                        onClick={() => {
+                          handleLikes(uploadItems.captionId);
+                        }}
+                      />
+                    </button>
                   )}
-
-                  <div className="likeBtn">{uploadItems.likes}</div>
                 </div>
               </div>
             </div>
