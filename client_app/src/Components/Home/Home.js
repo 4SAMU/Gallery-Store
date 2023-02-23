@@ -40,7 +40,6 @@ const Home = () => {
         const captionId = index._id;
         const imageId = index.image.slice(6);
         const data = await getLikesById(captionId);
-        console.log("is liked?", data);
 
         const items = {
           caption,
@@ -100,7 +99,6 @@ const Home = () => {
       }),
     });
     const data = await response.json();
-    console.log(data);
     if ((data.status = "like now")) {
       setDataFetched(true);
       getFiles();
