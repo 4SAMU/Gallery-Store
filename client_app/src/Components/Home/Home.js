@@ -5,7 +5,7 @@ import "./Home.css";
 import samu from "../../assets/samu.jpeg";
 import Navbar from "../Navabar/Navbar";
 
-import { FiHeart } from "@react-icons/all-files/fi/FiHeart";
+import { FaHeart } from "@react-icons/all-files/fa/FaHeart";
 import { BsDownload } from "@react-icons/all-files/bs/BsDownload";
 import Modal from "../ModalPopup/Modal";
 import jwt from "jwt-decode";
@@ -38,11 +38,16 @@ const Home = () => {
         const image = `https://gallery-store-api.vercel.app/${index.image}`;
         const captionId = index._id;
         const imageId = index.image.slice(6);
+        const data = await getLikesById(captionId);
+        console.log("is liked?", data);
+
         const items = {
           caption,
           image,
           captionId,
           imageId,
+          likes: data.likes,
+          status: data.status,
         };
         return items;
       })
@@ -68,8 +73,44 @@ const Home = () => {
     return URL.createObjectURL(blob);
   };
 
+  //get likes of a post by id
+  async function getLikesById(postId) {
+    let email = userd.email;
+    const response = await fetch(
+      `http://localhost:4000/likes/getLikesById?postId=${postId}&email=${email}`,
+      {
+        method: "GET",
+      }
+    );
+    const data = await response.json();
+    return data;
+  }
+
+  //handle likes
+  async function handleLikes(postId) {
+    // let email = userd.email;
+    // let post=
+    const response = await fetch("http://localhost:4000/likes", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        postId,
+        email: userd.email,
+      }),
+    });
+    const data = await response.json();
+    console.log(data);
+    if ((data.error = "already liked")) {
+      //
+    }
+  }
+
   useEffect(() => {
-    getFiles();
+    if (!dataFetched) {
+      getFiles();
+    }
   }, [dataFetched]);
 
   return (
@@ -149,7 +190,24 @@ const Home = () => {
                       <span className="dot">.</span>
                     </div>
                   )}
-                  <FiHeart className="likeBtn" />
+                  {uploadItems.status === "already liked" ? (
+                    <FaHeart
+                      className="likeBtn"
+                      style={{ color: "green" }}
+                      onClick={() => {
+                        handleLikes(uploadItems.captionId);
+                      }}
+                    />
+                  ) : (
+                    <FaHeart
+                      className="likeBtn"
+                      onClick={() => {
+                        handleLikes(uploadItems.captionId);
+                      }}
+                    />
+                  )}
+
+                  <div className="likeBtn">{uploadItems.likes}</div>
                 </div>
               </div>
             </div>
