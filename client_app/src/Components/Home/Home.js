@@ -101,7 +101,7 @@ const Home = () => {
     });
     const data = await response.json();
     console.log(data);
-    if (data.status = "like now") {
+    if ((data.status = "like now")) {
       setDataFetched(true);
       getFiles();
     }
